@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./static/css/main.css" />
+    <link rel="stylesheet" href="./static/css/mess.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source Sans Pro"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>Nura Rating</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./static/img/Logo Nura Slogan.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body id="main" style="display: none">
+    <div class="conten_message" id="conten_message" style="display: none">
+      <div class="form_info">
+        <div class="closeButton" onclick="closeWindow('conten_message')">
+          <img src="./static/img/close.svg" />
+        </div>
+        <div class="conten_message_item">
+          <div>
+            <img style="width: 400px" src="./static/img/tuvan.png" alt="" />
+          </div>
+          <div class="thankYou">
+            <h1>Trung tâm tầm soát Công nghệ cao Nura</h1>
+            <h1>Cám ơn Quý khách đã sử dụng dịch vụ của chúng tôi!</h1>
+          </div>
+          <div style="width: 100%; height: 80px">
+            <textarea
+              style="width: 100%; height: 70px"
+              type="text"
+              class="input__style"
+              placeholder="Để lại đánh giá góp ý"
+              rows="5"
+            ></textarea>
+          </div>
+          <div>
+            <button class="btn3" onclick="addRating()">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conten_message" id="ratingForm" style="display: none">
+      <div class="form_info">
+        <div class="closeButton" onclick="closeWindow('ratingForm')">
+          <img src="./static/img/close.svg" />
+        </div>
+        <div class="conten_message_item">
+          <div>
+            <div><label for="">Tên phòng khám:</label></div>
+            <div>
+              <!-- <input type="text" id="zoomName" value="" class="input__style" /> -->
+              <select name="zoomName" id="zoomName" class="input__style">
+                <option value="101">101</option>
+                <option value="102">102</option>
+                <option value="103">103</option>
+                <option value="104">104</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div><label for="">Bác sĩ:</label></div>
+            <div>
+              <input
+                type="text"
+                id="doctorName"
+                value=""
+                class="input__style"
+              />
+            </div>
+          </div>
+          <div style="margin-top: 20px">
+            <button class="btn3" onclick="addRatingInfo()">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main" id="main">
+      <div class="zoom" onclick="openRatingForm()">
+        <!-- <div><img src="./static/img/tuvan.png" alt="" /></div> -->
+        <div class="zoomName">Phòng tư vấn: <span id="zoomID"></span></div>
+      </div>
+      <div class="baner">
+        <div>
+          <img src="./static/img/Logo Nura Slogan.png" alt="" class="logo" />
+        </div>
+        <div>
+          <h1 style="margin-top: -10px">
+            Trung tâm tầm soát Công nghệ cao Nura
+          </h1>
+        </div>
+      </div>
+      <div class="rating">
+        <div class="rating-item" onclick="rating('Rất không hài lòng')">
+          <div class="rating-img">
+            <img src="./static/img/angry.svg" alt="" class="rating-icon" />
+          </div>
+          <div class="rating-content">
+            <h1 class="rating-text">Rất không hài lòng</h1>
+          </div>
+        </div>
+
+        <div class="rating-item" onclick="rating('Không hài lòng')">
+          <div class="rating-img">
+            <img src="./static/img/sad.svg" alt="" class="rating-icon" />
+          </div>
+          <div class="rating-content">
+            <h1 class="rating-text">Không hài lòng</h1>
+          </div>
+        </div>
+
+        <div class="rating-item" onclick="rating('Bình thường')">
+          <div class="rating-img">
+            <img src="./static/img/glad.svg" alt="" class="rating-icon" />
+          </div>
+          <div class="rating-content">
+            <h1 class="rating-text">Bình thường</h1>
+          </div>
+        </div>
+
+        <div class="rating-item" onclick="rating('Hài lòng')">
+          <div class="rating-img">
+            <img src="./static/img/great.svg" alt="" class="rating-icon" />
+          </div>
+          <div class="rating-content">
+            <h1 class="rating-text">Hài lòng</h1>
+          </div>
+        </div>
+        <div class="rating-item" onclick="rating('Rất hài lòng')">
+          <div class="rating-img">
+            <img src="./static/img/love.svg" alt="" class="rating-icon" />
+          </div>
+          <div class="rating-content">
+            <h1 class="rating-text">Rất hài lòng</h1>
+          </div>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </div>
+    <div class="fullDisplay zoomName" id="fullNone1" onclick="fullDispaly()">
+      Mở full màn hình
+    </div>
+    <div class="logout zoomName" id="fullNone2" onclick="logout()">
+      Đăng xuất
+    </div>
+  </body>
+</html>
+
+<script src="./static/js/auth.js"></script>
+<script src="./static/js/full.js"></script>
+<script src="./static//js/rating.js"></script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/main.css" />
+    <link rel="stylesheet" href="../static/css/mess.css" />
+    <link rel="stylesheet" href="./dashboard.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source Sans Pro"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>Nura Rating</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../static/img/Logo Nura Slogan.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body id="main" style="display: block; padding: 20px" class="main">
+    <div
+      class="baner"
+      style="justify-content: flex-start; align-items: self-start"
+    >
+      <div>
+        <img
+          src="../static/img/Logo Nura Slogan.png"
+          alt=""
+          class="logo"
+          style="width: 150px"
+        />
+      </div>
+    </div>
+    <div class="check">
+      Từ:
+      <input
+        type="date"
+        style="min-width: 160px"
+        class="input__style"
+        name=""
+        id="dateBegin"
+      />
+      Đến:
+      <input
+        type="date"
+        style="min-width: 160px"
+        class="input__style"
+        name=""
+        id="dateEnd"
+      />
+      <button class="btn3" onclick="infoRating()">Check</button>
+    </div>
+    <div class="info_all">
+      <div class="info">Không hài lòng: <span></span></div>
+      <div class="info">Hài lòng: <span></span></div>
+      <div class="info">Rất Hài lòng: <span></span></div>
+    </div>
+    <div>
+      <div>
+        <table></table>
+      </div>
+    </div>
+  </body>
+  <script src="./dashboard.js"></script>
+</html>
