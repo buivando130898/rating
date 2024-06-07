@@ -1,6 +1,5 @@
-// server = 'http://localhost:8080/khuyenmai/api/auth.php/login';
-server = "http://localhost/rating/api/auth.php/login";
-// server = 'https://khuyenmai.t-matsuoka.com/api/auth.php/login';
+// server = "http://localhost/rating/api/auth.php/login";
+server = "http://ratingnura.nura.com.vn//api/auth.php/login";
 
 function login() {
   user = document.getElementById("user").value;

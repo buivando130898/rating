@@ -1,5 +1,5 @@
-server = "http://localhost/rating";
-// server = 'https://khuyenmai.t-matsuoka.com';
+// server = "http://localhost/rating";
+server = "http://ratingnura.nura.com.vn";
 
 function logout() {
   localStorage.removeItem("user");
