@@ -43,6 +43,7 @@
         style="min-width: 160px"
         class="input__style"
         name=""
+        value=""
         id="dateBegin"
       />
       Đến:
@@ -51,20 +52,22 @@
         style="min-width: 160px"
         class="input__style"
         name=""
+        value=""
         id="dateEnd"
       />
       <button class="btn3" onclick="infoRating()">Check</button>
     </div>
     <div class="info_all">
-      <div class="info">Không hài lòng: <span></span></div>
+      <!-- <div class="info">Không hài lòng: <span></span></div>
       <div class="info">Hài lòng: <span></span></div>
-      <div class="info">Rất Hài lòng: <span></span></div>
+      <div class="info">Rất Hài lòng: <span></span></div> -->
     </div>
     <div>
-      <div>
-        <table></table>
+      <div class="table">
+        <table id="ratingTable"></table>
       </div>
     </div>
   </body>
+  <script src="../static/js/auth.js"></script>
   <script src="./dashboard.js"></script>
 </html>

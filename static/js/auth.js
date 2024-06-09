@@ -1,5 +1,5 @@
-// server = "http://localhost/rating";
-server = "http://ratingnura.nura.com.vn";
+server = "http://localhost/rating";
+// server = "http://ratingnura.nura.com.vn";
 
 function logout() {
   localStorage.removeItem("user");
@@ -33,21 +33,14 @@ function tokenCheck() {
         console.log(data);
         if (data) {
           document.getElementById("main").style.display = "block";
-          setValue(
-            "doctorName",
-            localStorage["doctorName"] ? localStorage["doctorName"] : ""
-          );
-          setValue(
-            "zoomName",
-            localStorage["zoomName"] ? localStorage["zoomName"] : ""
-          );
         } else {
           window.location = `${server}/login`;
         }
       })
       .catch(function (error) {
-        document.getElementById("info_erro").innerHTML =
-          "Tài khoản hoặc mật khẩu không chính xác";
+        console.log(error);
+        // document.getElementById("info_erro").innerHTML =
+        //   "Tài khoản hoặc mật khẩu không chính xác";
       });
   } else {
     window.location = `${server}/login`;

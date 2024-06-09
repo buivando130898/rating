@@ -40,8 +40,9 @@
               style="width: 100%; height: 70px"
               type="text"
               class="input__style"
-              placeholder="Để lại đánh giá góp ý"
+              placeholder="Vui lòng để lại đánh giá của bạn nếu có thể"
               rows="5"
+              id="mess"
             ></textarea>
           </div>
           <div>
@@ -53,35 +54,71 @@
 
     <div class="conten_message" id="ratingForm" style="display: none">
       <div class="form_info">
-        <div class="closeButton" onclick="closeWindow('ratingForm')">
+        <!-- <div class="closeButton" onclick="closeWindow('ratingForm')">
           <img src="./static/img/close.svg" />
-        </div>
+        </div> -->
         <div class="conten_message_item">
+          <h1>Thông tin phòng tư vấn</h1>
           <div>
-            <div><label for="">Tên phòng khám:</label></div>
-            <div>
-              <!-- <input type="text" id="zoomName" value="" class="input__style" /> -->
-              <select name="zoomName" id="zoomName" class="input__style">
-                <option value="101">101</option>
-                <option value="102">102</option>
-                <option value="103">103</option>
-                <option value="104">104</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <div><label for="">Bác sĩ:</label></div>
-            <div>
+            <div class="zoomID">
+              <label class="zoomNameLable" for="101">Phòng 101:</label>
               <input
                 type="text"
-                id="doctorName"
-                value=""
                 class="input__style"
+                placeholder="Tên bác sĩ"
+                id="101"
               />
+              <button class="btn3" onclick="addRatingInfo('101')">
+                Select
+              </button>
+            </div>
+            <div class="zoomID">
+              <label class="zoomNameLable" for="102">Phòng 102:</label>
+              <input
+                type="text"
+                class="input__style"
+                placeholder="Tên bác sĩ"
+                id="102"
+              />
+              <button class="btn3" onclick="addRatingInfo('102')">
+                Select
+              </button>
+            </div>
+            <div class="zoomID">
+              <label class="zoomNameLable" for="101">Phòng 103:</label>
+              <input
+                type="text"
+                class="input__style"
+                placeholder="Tên bác sĩ"
+                id="103"
+              />
+              <button class="btn3" onclick="addRatingInfo('103')">
+                Select
+              </button>
+            </div>
+            <div class="zoomID">
+              <label
+                class="zoomNameLable"
+                for="101"
+                onclick="addRatingInfo('104')"
+                >Phòng 104:</label
+              >
+              <input
+                type="text"
+                class="input__style"
+                placeholder="Tên bác sĩ"
+                id="104"
+              />
+              <button class="btn3" onclick="addRatingInfo('104')">
+                Select
+              </button>
             </div>
           </div>
+
           <div style="margin-top: 20px">
-            <button class="btn3" onclick="addRatingInfo()">Xác nhận</button>
+            <button class="btn3" onclick="updateZoomAll()">
+              Update phòng khám
+            </button>
           </div>
         </div>
       </div>
@@ -90,7 +127,10 @@
     <div class="main" id="main">
       <div class="zoom" onclick="openRatingForm()">
         <!-- <div><img src="./static/img/tuvan.png" alt="" /></div> -->
-        <div class="zoomName">Phòng tư vấn: <span id="zoomID"></span></div>
+        <div class="zoomName">
+          <div>Phòng tư vấn: <span id="zoomID"></span></div>
+          <div>BS: <span id="zoomDoctor"></span></div>
+        </div>
       </div>
       <div class="baner">
         <div>
