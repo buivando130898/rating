@@ -112,7 +112,7 @@ function addRating() {
         closeWindow("conten_message");
         setTimeout(() => {
           checkZoom();
-        }, 1000);
+        }, 3000);
       } else {
         console.log(data);
         alert("Đã xảy ra lỗi!");
