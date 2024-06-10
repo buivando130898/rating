@@ -80,8 +80,8 @@ function updateZoomAll() {
   updateZoom("104");
   setTimeout(
     (() => {
-      // alert("Thêm thông tin bác sĩ thành công!");
-      location.reload();
+      alert("Thêm thông tin bác sĩ thành công!");
+      // location.reload();
     },
     1000)
   );
