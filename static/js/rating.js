@@ -59,7 +59,8 @@ function updateZoom(zoomID) {
       .then(function (response) {
         data = response.data;
         if (data == true) {
-          closeWindow("conten_message");
+          // closeWindow("conten_message");
+          console.log("Thành công");
         } else {
           console.log(data);
           alert("Đã xảy ra lỗi!");
@@ -79,7 +80,8 @@ function updateZoomAll() {
   updateZoom("104");
   setTimeout(
     (() => {
-      alert("Thêm thông tin bác sĩ thành công!");
+      // alert("Thêm thông tin bác sĩ thành công!");
+      location.reload();
     },
     1000)
   );
