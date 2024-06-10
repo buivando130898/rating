@@ -139,7 +139,7 @@ function addRatingInfo(zoomID) {
     localStorage.setItem("doctorName", doctorName);
     closeWindow("ratingForm");
   } else {
-    alert("Vui lòng nhập số phòng!");
+    alert("Vui lòng nhập tên bác sĩ!");
   }
 }
 
