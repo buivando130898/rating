@@ -78,13 +78,7 @@ function updateZoomAll() {
   updateZoom("102");
   updateZoom("103");
   updateZoom("104");
-  setTimeout(
-    (() => {
-      alert("Thêm thông tin bác sĩ thành công!");
-      // location.reload();
-    },
-    1000)
-  );
+  alert("Thêm thông tin bác sĩ thành công!");
 }
 
 function rating(value) {
