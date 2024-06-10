@@ -79,7 +79,7 @@ function updateZoomAll() {
   updateZoom("104");
   setTimeout(
     (() => {
-      location.reload();
+      alert("Thêm thông tin bác sĩ thành công!");
     },
     1000)
   );
