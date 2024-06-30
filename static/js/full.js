@@ -12,6 +12,7 @@ function fullDispaly() {
     document.documentElement.msRequestFullscreen();
   }
 
+  closeBlock("fullNone0");
   closeBlock("fullNone1");
   closeBlock("fullNone2");
 }

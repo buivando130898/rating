@@ -13,7 +13,7 @@ function checkZoom() {
   data = {
     token,
   };
-  openFlex("ratingForm");
+  // openFlex("ratingForm");
   axios
     .get(
       server + "/api/user.php/get_zoom",
@@ -29,6 +29,7 @@ function checkZoom() {
       for (value of data) {
         console.log(value);
         setValue(value.zoom, value.doctor);
+        document.getElementById(`doctor${value.zoom}`).innerHTML = value.doctor;
       }
       // if (data.length == 0) {
       //   openFlex("ratingForm");
@@ -82,7 +83,8 @@ function updateZoomAll() {
 }
 
 function rating(value) {
-  openFlex("conten_message");
+  // openFlex("conten_message");
+  openFlex("ratingDoctor");
   ratingSend = value;
 }
 
@@ -131,7 +133,8 @@ function addRatingInfo(zoomID) {
   if (doctorName) {
     localStorage.setItem("zoomName", zoomName);
     localStorage.setItem("doctorName", doctorName);
-    closeWindow("ratingForm");
+    closeWindow("ratingDoctor");
+    openFlex("conten_message");
   } else {
     alert("Vui lòng nhập tên bác sĩ!");
   }
