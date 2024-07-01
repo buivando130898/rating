@@ -80,6 +80,7 @@ function updateZoomAll() {
   updateZoom("103");
   updateZoom("104");
   alert("Thêm thông tin bác sĩ thành công!");
+  closeBlock("ratingForm");
 }
 
 function rating(value) {
@@ -130,14 +131,14 @@ function addRatingInfo(zoomID) {
   document.getElementById("zoomID").innerHTML = zoomID;
   document.getElementById("zoomDoctor").innerHTML = doctorName;
 
-  if (doctorName) {
-    localStorage.setItem("zoomName", zoomName);
-    localStorage.setItem("doctorName", doctorName);
-    closeWindow("ratingDoctor");
-    openFlex("conten_message");
-  } else {
-    alert("Vui lòng nhập tên bác sĩ!");
-  }
+  // if (doctorName) {
+  localStorage.setItem("zoomName", zoomName);
+  localStorage.setItem("doctorName", doctorName);
+  closeWindow("ratingDoctor");
+  openFlex("conten_message");
+  // } else {
+  //   alert("Vui lòng nhập tên bác sĩ!");
+  // }
 }
 
 function openRatingForm() {
