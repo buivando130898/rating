@@ -6,8 +6,17 @@ beginApp();
 
 function setDate() {
   console.log(getToday());
-  setValue("dateBegin", getToday());
-  setValue("dateEnd", getToday());
+  if (localStorage.getItem("dateBegin")) {
+    setValue("dateBegin", localStorage.getItem("dateBegin"));
+  } else {
+    setValue("dateBegin", getToday());
+  }
+
+  if (localStorage.getItem("dateEnd")) {
+    setValue("dateEnd", localStorage.getItem("dateEnd"));
+  } else {
+    setValue("dateEnd", getToday());
+  }
 }
 
 function getToday() {
@@ -19,10 +28,24 @@ function getToday() {
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate;
 }
+function checkColorRating(rating) {
+  if (
+    rating == "Rất không hài lòng" ||
+    rating == "Không hài lòng" ||
+    rating == "Bình thường"
+  ) {
+    return "red";
+  }
+  return "black";
+}
 
 function infoRating() {
   let dateBegin = getValue("dateBegin");
   let dateEnd = getValue("dateEnd");
+
+  localStorage.setItem("dateBegin", dateBegin);
+  localStorage.setItem("dateEnd", dateEnd);
+
   data = {
     dateBegin,
     dateEnd,
@@ -43,7 +66,7 @@ function infoRating() {
       data = response.data;
       console.log("Check");
       console.log(data);
-
+      var point = 0;
       document.getElementById("ratingTable").innerHTML;
       stt = 0;
       table = `
@@ -58,18 +81,27 @@ function infoRating() {
       `;
       if (data.length > 0) {
         for (value of data) {
+          point += CheckPoint(value.content);
           table += `
             <tr>
               <td>${stt++}</td>
               <td>${value.zoom}</td>
               <td>${value.doctor}</td>
-              <td>${value.content}</td>
-              <td>${value.mess}</td>
+              <td  style = "color: ${checkColorRating(value.content)}">${
+            value.content
+          }</td>
+              <td >${value.mess ? value.mess : ""}</td>
               <td>${value.timeInput}</td>
             </tr>
           `;
         }
       }
+      let lengRatting = data.length;
+      console.log(data);
+      console.log(point);
+      console.log(lengRatting);
+      let rul = ((point + 5) / data.length).toFixed(2);
+      document.getElementById("All").innerHTML = rul;
       document.getElementById("ratingTable").innerHTML = table;
     })
     .catch(function (error) {
@@ -77,3 +109,52 @@ function infoRating() {
       alert("Đã xảy ra lỗi!");
     });
 }
+
+rattingSynthetic();
+function rattingSynthetic() {
+  let dateBegin = getValue("dateBegin");
+  let dateEnd = getValue("dateEnd");
+  axios
+    .get(
+      server + "/api/user.php/get_rating_synthetic",
+      { params: data },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then(function (response) {
+      data = response.data;
+
+      for (value of data) {
+        console.log(value);
+        document.getElementById(value.content).innerHTML = value.quantity;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Erro");
+    });
+}
+
+var contentPoint = [
+  "Rất không hài lòng",
+  "Không hài lòng",
+  "Bình thường",
+  "Hài lòng",
+  "Rất hài lòng",
+];
+
+function CheckPoint(value) {
+  for (let i = 0; i < 5; i++) {
+    if (contentPoint[i] == value) {
+      return i + 1;
+    }
+  }
+}
+
+let a = 7;
+let b = 3;
+let result = (a / b).toFixed(2);
+console.log(result); // Kết quả: 2.33

@@ -102,6 +102,30 @@ class api extends restful_api
         }
     }
 
+    function get_rating_synthetic()
+    {
+        $user =  tokenLogin($_GET["token"]);
+        $data = [];
+        if ($this->method == 'GET' && $user) {
+            include('connect.php');
+            $dateBegin = $_GET['dateBegin'];
+            $dateEnd = $_GET['dateEnd'];
+            $sql = "SELECT content, COUNT(*) AS quantity FROM `rt_rating` WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd'  GROUP BY content";
+            // echo $sql;
+            // rt_log($user["user"], "add_customer", $sql, $time);
+            mysqli_set_charset($conn, 'UTF8');
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+            $conn->query($sql);
+            $conn->close();
+            $this->response(200, $data);
+        }
+    }
+
 
     function get_zoom()
     {
