@@ -96,7 +96,7 @@ function infoRating() {
           `;
         }
       }
-      let rul = ((point + 5) / (data.length - 1)).toFixed(2);
+      let rul = (point / data.length).toFixed(2);
       document.getElementById("All").innerHTML = rul;
       document.getElementById("ratingTable").innerHTML = table;
     })
