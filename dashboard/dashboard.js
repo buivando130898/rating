@@ -69,7 +69,7 @@ function infoRating() {
       console.log(data);
       var point = 0;
       document.getElementById("ratingTable").innerHTML;
-      stt = 0;
+      stt = 1;
       table = `
       <tr>
         <th>STT</th>
@@ -110,6 +110,11 @@ function infoRating() {
 function rattingSynthetic() {
   let dateBegin = getValue("dateBegin");
   let dateEnd = getValue("dateEnd");
+  data = {
+    dateBegin,
+    dateEnd,
+    token,
+  };
   axios
     .get(
       server + "/api/user.php/get_rating_synthetic",
