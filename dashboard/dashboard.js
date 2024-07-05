@@ -126,9 +126,8 @@ function rattingSynthetic() {
     )
     .then(function (response) {
       data = response.data;
-
+      console.log(data);
       for (value of data) {
-        console.log(value);
         document.getElementById(value.content).innerHTML = value.quantity;
       }
     })
