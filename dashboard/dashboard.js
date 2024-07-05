@@ -40,6 +40,7 @@ function checkColorRating(rating) {
 }
 
 function infoRating() {
+  rattingSynthetic();
   let dateBegin = getValue("dateBegin");
   let dateEnd = getValue("dateEnd");
 
@@ -106,7 +107,6 @@ function infoRating() {
     });
 }
 
-rattingSynthetic();
 function rattingSynthetic() {
   let dateBegin = getValue("dateBegin");
   let dateEnd = getValue("dateEnd");
