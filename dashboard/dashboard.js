@@ -40,6 +40,8 @@ function checkColorRating(rating) {
 }
 
 function infoRating() {
+  closeWindow("ratingDoctor");
+  openTable("ratingTable");
   rattingSynthetic();
   let dateBegin = getValue("dateBegin");
   let dateEnd = getValue("dateEnd");
@@ -100,6 +102,132 @@ function infoRating() {
       let rul = (point / data.length).toFixed(2);
       document.getElementById("All").innerHTML = rul;
       document.getElementById("ratingTable").innerHTML = table;
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert("Đã xảy ra lỗi!");
+    });
+}
+
+function infoDoctor() {
+  rattingSynthetic();
+  infoRating();
+  closeWindow("ratingTable");
+  openTable("ratingDoctor");
+
+  let dateBegin = getValue("dateBegin");
+  let dateEnd = getValue("dateEnd");
+
+  localStorage.setItem("dateBegin", dateBegin);
+  localStorage.setItem("dateEnd", dateEnd);
+
+  data = {
+    dateBegin,
+    dateEnd,
+    token,
+  };
+  console.log(data);
+  axios
+    .get(
+      server + "/api/user.php/get_doctor_rating",
+      { params: data },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then(function (response) {
+      data = response.data;
+      console.log(data);
+      document.getElementById("ratingTable").innerHTML;
+      stt = 1;
+      table = `
+      <tr>
+        <th>STT</th>
+        <th>Phòng</th>
+        <th>Bác sĩ</th>
+        <th>Điểm</th>
+        <th>Tuỳ chọn</th>
+      </tr>
+      `;
+      if (data.length > 0) {
+        for (value of data) {
+          table += `
+            <tr>
+              <td>${stt++}</td>
+              <td>${value.zoom}</td>
+              <td>${value.doctor}</td>
+              <td>${value.pointAVG}</td>
+              <td><button onclick="viewDoctor('${
+                value.doctor
+              }')">Xem</button></td>
+            </tr>
+          `;
+        }
+      }
+      document.getElementById("ratingDoctor").innerHTML = table;
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert("Đã xảy ra lỗi!");
+    });
+}
+
+function viewDoctor(name) {
+  let dateBegin = getValue("dateBegin");
+  let dateEnd = getValue("dateEnd");
+
+  localStorage.setItem("dateBegin", dateBegin);
+  localStorage.setItem("dateEnd", dateEnd);
+  data = {
+    dateBegin,
+    dateEnd,
+    name,
+    token,
+  };
+  console.log(data);
+  axios
+    .get(
+      server + "/api/user.php/get_view_doctor",
+      { params: data },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then(function (response) {
+      data = response.data;
+      console.log(data);
+      document.getElementById("ratingTable").innerHTML;
+      stt = 1;
+      table = `
+      <tr>
+        <th>STT</th>
+        <th>Phòng</th>
+        <th>Bác sĩ</th>
+        <th>Đánh giá</th>
+        <th>Góp ý</th>
+        <th>Thời gian</th>
+      </tr>
+      `;
+      if (data.length > 0) {
+        for (value of data) {
+          table += `
+            <tr>
+              <td>${stt++}</td>
+              <td>${value.zoom}</td>
+              <td>${value.doctor}</td>
+              <td>${value.content}</td>
+              <td>${value.mess ? value.mess : ""}</td>
+              <td>${value.timeInput}</td>
+            </tr>
+          `;
+        }
+      }
+      document.getElementById("view-doctor").innerHTML = table;
+      openFlex("viewDoctor");
     })
     .catch(function (error) {
       console.log(error);

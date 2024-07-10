@@ -23,6 +23,16 @@
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body id="main" style="display: block; padding: 20px" class="main">
+    <div class="conten_message" id="viewDoctor" style="display: none">
+      <div class="form_info">
+        <div class="closeButton" onclick="closeWindow('viewDoctor')">
+          <img src="../static/img/close.svg" />
+        </div>
+        <div class="table">
+          <table id="view-doctor"></table>
+        </div>
+      </div>
+    </div>
     <div
       class="baner"
       style="justify-content: flex-start; align-items: self-start"
@@ -41,25 +51,32 @@
       </div>
     </div>
     <div class="check">
-      Từ:
-      <input
-        type="date"
-        style="min-width: 160px"
-        class="input__style"
-        name=""
-        value=""
-        id="dateBegin"
-      />
-      Đến:
-      <input
-        type="date"
-        style="min-width: 160px"
-        class="input__style"
-        name=""
-        value=""
-        id="dateEnd"
-      />
-      <button class="btn3" onclick="infoRating()">Check</button>
+      <div class="check-item">
+        Từ:
+        <input
+          type="date"
+          style="min-width: 100px"
+          class="input__style"
+          name=""
+          value=""
+          id="dateBegin"
+        />
+        Đến:
+        <input
+          type="date"
+          style="min-width: 100px"
+          class="input__style"
+          name=""
+          value=""
+          id="dateEnd"
+        />
+      </div>
+      <div class="check-item" style="margin-left: 10px">
+        <button class="btn3" onclick="infoRating()">Đánh giá chung</button>
+        <button class="btn3" onclick="infoDoctor()">
+          Đánh giá theo bác sĩ
+        </button>
+      </div>
     </div>
     <div id="all_ratting">
       <!-- <div class="ratingItem"></div> -->
@@ -91,6 +108,7 @@
     <div>
       <div class="table">
         <table id="ratingTable"></table>
+        <table id="ratingDoctor" style="display: none; width: 100%"></table>
       </div>
     </div>
   </body>

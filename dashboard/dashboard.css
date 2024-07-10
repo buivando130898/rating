@@ -48,3 +48,12 @@
     color: #3d566a;
 
 }
+
+.check {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.check > div {
+    padding: 5px 0px;
+}

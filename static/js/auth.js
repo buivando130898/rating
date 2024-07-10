@@ -60,6 +60,10 @@ function openFlex(id) {
   document.getElementById(id).style.display = "flex";
 }
 
+function openTable(id) {
+  document.getElementById(id).style.display = "table";
+}
+
 function closeBlock(id) {
   document.getElementById(id).style.display = "none";
 }
