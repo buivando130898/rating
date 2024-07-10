@@ -145,8 +145,8 @@ function infoDoctor() {
       table = `
       <tr>
         <th>STT</th>
-        <th>Phòng</th>
         <th>Bác sĩ</th>
+        <th>Số lượng đánh giá</th>
         <th>Điểm</th>
         <th>Tuỳ chọn</th>
       </tr>
@@ -156,8 +156,8 @@ function infoDoctor() {
           table += `
             <tr>
               <td>${stt++}</td>
-              <td>${value.zoom}</td>
               <td>${value.doctor}</td>
+              <td>${value.countDoctor}</td>
               <td>${value.pointAVG}</td>
               <td><button onclick="viewDoctor('${
                 value.doctor

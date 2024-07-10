@@ -154,7 +154,7 @@ class api extends restful_api
             include('connect.php');
             $dateBegin = $_GET['dateBegin'];
             $dateEnd = $_GET['dateEnd'];
-            $sql = "SELECT *, AVG(point) as pointAVG FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' GROUP BY doctor";
+            $sql = "SELECT  doctor, AVG(point) as pointAVG, COUNT(doctor) AS countDoctor FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' GROUP BY doctor";
             // echo $sql;
             // rt_log($user["user"], "add_customer", $sql, $time);
             mysqli_set_charset($conn, 'UTF8');
