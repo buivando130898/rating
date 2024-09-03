@@ -112,7 +112,8 @@ class api extends restful_api
             }
             $conn->query($sql);
             $conn->close();
-            $this->response(200, $data);
+
+            $this->response(200, $data[0]);
         }
     }
 
