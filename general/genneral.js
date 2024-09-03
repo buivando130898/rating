@@ -6,25 +6,25 @@ const question = [
     answer: "",
   },
   {
-    name: "op_no"
+    name: "op_no",
     title: "ID NURA:",
     type: "text",
     answer: "",
   },
   {
-    name: "phone"
+    name: "phone",
     title: "Số điện thoại liên lạc:",
     type: "text",
     answer: "",
   },
   {
-    name: "mail"
+    name: "mail",
     title: "ID email:",
     type: "text",
     answer: "",
   },
   {
-    name" 
+    name: "",
     title:
       "Vui lòng cho biết mức độ hài lòng chung của bạn với chuyến thăm khám ngày hôm nay? (Điểm số cao nhất là 10)",
     type: "rating",
