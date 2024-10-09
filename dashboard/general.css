@@ -1,6 +1,18 @@
+/* .tableInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #ababab9c;
+    z-index: 100000;
+    
+} */
+
 #content {
     padding: 20px;
-    padding-left: 252px;
+    padding-left: 222px;
 }
 
 .info_all {
@@ -24,12 +36,13 @@
     text-decoration: none;
     cursor: pointer;
     background-color: rgb(39, 170, 225);
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 #all_ratting {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -52,22 +65,21 @@
     text-align: center;
     font-size: 20px;
     color: #3d566a;
-
 }
 
 .check {
     display: flex;
     flex-wrap: wrap;
+    padding: 0px 20px;
 }
 
 .check > div {
     padding: 5px 0px;
 }
 
-
 #all_ratting {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -90,7 +102,6 @@
     text-align: center;
     font-size: 20px;
     color: #3d566a;
-
 }
 
 .check {
@@ -104,37 +115,53 @@
 
 #all_ratting_v2 {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
+
 .rating_item_v2 {
     width: 30%;
+    padding: 10px 20px;
     min-width: 390px;
     background-color: red;
-    padding: 10px;
     display: flex;
-    justify-content: left;
-    align-items: center;
+    flex-direction: column;
     background-color: #fff;
     margin: 10px;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
     /* border: 1px solid #c1c1c1; */
     cursor: pointer;
-    box-shadow: 0 .125rem #0a0a0a0a;
+    box-shadow: 0 0.125rem #0a0a0a0a;
+}
+
+.rating_item_small {
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    background-color: #f2f2f2;
+    border-radius: 3px;
 }
 
 .rating_logo {
-    padding: 6px;
-    background-color: antiquewhite;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
     border-radius: 8px;
     margin-right: 20px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.rating_title_all_v2 {
+    color: #002687;
+    font-size: 18px;
+    padding: 10px 0px;
 }
 
 /* Styles for the pie chart */
 .sources {
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 .pie-chart-container {
     position: relative;
@@ -147,24 +174,18 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: conic-gradient(
-        #007BFF 0% 30%, 
-        #20c997 30% 50%, 
-        #fd7e14 50% 85%, 
-        #ffc107 85% 95%, 
-        #dc3545 95% 100%
-    );
+    background: conic-gradient(#ffffff 100%);
     position: relative;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .pie-chart::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80px;  /* Giảm kích thước vòng tròn bên trong */
+    width: 80px; /* Giảm kích thước vòng tròn bên trong */
     height: 80px; /* Giảm kích thước vòng tròn bên trong */
     background-color: #fff;
     border-radius: 50%;
@@ -172,7 +193,6 @@
 }
 
 .legend {
-    margin-left: 50px;
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
@@ -186,7 +206,7 @@
     margin-bottom: 10px;
 }
 
-.legend span {
+.block_color {
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -195,8 +215,76 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.blue { background-color: #007BFF; }
-.green { background-color: #20c997; }
-.orange { background-color: #fd7e14; }
-.yellow { background-color: #ffc107; }
-.red { background-color: #dc3545; }
+.blue {
+    background-color: #007bff;
+}
+.green {
+    background-color: #20c997;
+}
+.orange {
+    background-color: #fd7e14;
+}
+.yellow {
+    background-color: #ffc107;
+}
+.red {
+    background-color: #dc3545;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1; /* Đặt `z-index` thấp hơn nội dung chính */
+}
+
+.percent {
+    width: 50px !important;
+    display: inline-flex !important;
+    padding: 0px;
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#ageChartContainer {
+    width: 100%;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.chart-container {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.chart-container2 {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.labale_div {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
+}
+
+#date_late {
+    background-color: #5389fff1;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin: 0px 2px;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 660px) {
+    .rating_item_v2 {
+        min-width: 360px;
+    }
+}

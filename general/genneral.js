@@ -1,3 +1,9 @@
+questionAll = {
+  "satisfied": 10,
+  "introduce": 10
+
+};
+
 const question = [
   {
     name: "name",
@@ -24,46 +30,41 @@ const question = [
     answer: "",
   },
   {
-    name: "",
+    name: "satisfied",
     title:
-      "Vui lòng cho biết mức độ hài lòng chung của bạn với chuyến thăm khám ngày hôm nay? (Điểm số cao nhất là 10)",
+      "Vui lòng cho biết mức độ hài lòng chung của bạn với dịch vụ của chúng tôi. (từ 0-10)",
     type: "rating",
     answer: "",
   },
   {
+    name: "introduce",
     title:
-      "Khả năng bạn sẽ giới thiệu chúng tôi với bạn bè? (Điểm số cao nhất là 10)",
+      "Nếu chấm điểm sự sẵn lòng giới thiệu Nura cho bạn bè, gia đình và người quen, thì bạn sẽ cho Nura mấy điểm? (từ 0-10)",
     type: "rating",
     answer: "",
   },
   {
-    title:
-      "Vui lòng đề xuất cho chúng tôi bất cứ điều gì chúng tôi có thể làm để cải thiện chuyến thăm khám của bạn?",
+    name: "why",
+    title: "Vì sao bạn cho số điểm trên?",
     type: "text",
     answer: "",
   },
   {
-    title: "Bạn sẽ quay lại tầm soát tại NURA?",
-    type: "radio",
-    answer: [
-      "Có, tôi muốn quay lại NURA để sàng lọc hàng năm",
-      "Không, tôi muốn đến bệnh viện hoặc trung tâm khác.",
-      "Không, tôi không muốn đến nữa",
-    ],
-  },
-  {
-    title: "Nếu bạn là khách công ty, vui lòng ghi rõ tên công ty của bạn",
+    name: "good",
+    title: "Để phục vụ bạn được tốt hơn, theo bạn chúng tôi cần phải làm gì??",
     type: "text",
     answer: "",
   },
   {
-    title: "Bạn biết tới Nura qua cách nào?",
+    name: "source",
+    title: "Bạn biết đến NURA từ nguồn thông tin nào?",
     type: "radio",
     answer: [
-      "Người thân/Bạn bè giới thiệu trực tiếp.",
-      "Facebook/ tiktok người quen.",
-      "Truyền thông/báo chí/mạng xã hội TT Nura",
-      "Tổng đài",
+      "Người thân/bạn bè giới thiệu trực tiếp",
+      "Facebook/ tiktok/ mạng xã hội của người quen",
+      "Internet/ Mạng xã hội Nura (Facebook/Youtube/Tiktok)",
+      "Trực tiếp từ Bảng biển ngoài phòng khám",
+      "Nguồn khác"
     ],
   },
 ];
@@ -74,7 +75,15 @@ function questionBegin() {
   question.forEach((value, index) => {
     switch (value.type) {
       case "text":
-        question_html += imputText(value, index);
+        question_html += inputText(value, index);
+        break;
+
+      case "rating":
+        question_html += inputRating(value, index);
+        break;
+
+      case "radio":
+        question_html += inputRadio(value, index);
         break;
 
       default:
@@ -86,11 +95,20 @@ function questionBegin() {
   document.getElementById("question_content").innerHTML = question_html;
 }
 
-function imputText(value, index) {
+function getValueQues(ques, point){
+  document.getElementById(ques + questionAll[ques]).style.backgroundColor = '#f0f0f0f0';
+  questionAll = {
+    ...questionAll,
+    [ques]: point
+  }
+  document.getElementById(ques + point).style.backgroundColor = '#fac141'
+}
+
+function inputText(value, index) {
   html_input = `
         <div class="input_general">
             <lable class="lable">${index + 1}. ${value.title}</lable>
-            <input class="inputText" name="${
+            <input class="inputText" autocomplete="off" name="${
               value.name
             }" placeholder="Nhập câu trả lời">
         </div>
@@ -98,22 +116,103 @@ function imputText(value, index) {
   return html_input;
 }
 
-function imputRadio(value, index) {
-  html_radio = "";
-  data_radio = value.answer;
-  data_radio.forEach((value, index) => {
-    html_radio ==
-      `
-        <lable class="lable_radio">${value}</lable>
-        <input type="radio" id="" name="fav_language" value="HTML">
-    
+function inputRadio(value, index) {
+    answerHTML = ""
+    dataAnswer = value.answer
+    for (answerValue of dataAnswer ) {
+      answerHTML+= `
+        <div class = "radio_input">
+          <input type="radio" id="${answerValue}" name="${value.name}" value="${answerValue}">
+          <label for="${answerValue}">${answerValue}</label><br>
+        </div>
+        `
+    }
+
+    html_input = `
+      <div class="input_general ">
+          <lable class="lable">${index + 1}. ${value.title}</lable>
+            ${answerHTML}
+      </div>
     `;
-  });
+
+  return html_input;
+}
+
+function inputRating(value, index) {
+  buttonSelect = "";
+  for(i=0; i<=10; i++) {
+    buttonSelect += `
+      <button onclick="getValueQues('${value.name}', ${i})" class="ques" id="${value.name + i}" >${i}</button>
+    `
+  }
 
   html_input = `
-          <div class="input_general">
-              <lable class="lable">${index + 1}. ${value.title}</lable>
-          </div>
-      `;
+        <div class="input_general">
+            <lable class="lable">${index + 1}. ${value.title}</lable>
+            <div class="ques_all">
+              ${buttonSelect}
+            </div>
+
+        </div>
+    `;
   return html_input;
+}
+
+function check() {
+  console.log(questionAll);
+}
+
+function getvalue(id) {
+  const data = document.querySelector(`input[name="${id}"]`).value;
+  return data
+
+}
+
+function ratingConfirm(){
+  name = getvalue('name');
+  op_no = getvalue('op_no');
+  phone = getvalue('phone');
+  mail = getvalue('mail');
+  why = getvalue('why');
+  source = getvalue('source');
+  good = getvalue('good');
+  questionAll = {
+    ...questionAll,
+    name,
+    op_no,
+    phone,
+    mail,
+    why,
+    source,
+    good,
+    token
+  }
+  console.log(questionAll);
+  
+  if( name ) {
+    axios
+    .post(server + '/api/general.php/add_general', questionAll, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+    .then(function (response) {
+        data = response.data;
+        console.log(data);        
+        if (data == true) {
+            noti('success', 'Cám ơn quý khách đã để lại đánh giá');
+        } else {
+            noti('error', 'Đã xảy ra lỗi SQL');
+        }
+    })
+    .catch(function (error) {
+      
+        noti('error', 'Đã xảy ra lỗi hệ thống');
+    });
+} else {
+  alert("Vui lòng nhấp đầy đủ thông tin");
+    noti('error', 'Vui lòng nhấp đầy đủ thông tin');
+}
+
+
 }

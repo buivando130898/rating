@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../static/css/main.css" />
+        <link rel="stylesheet" href="../static/css/mess.css" />
+        <link rel="stylesheet" href="./dashboard.css" />
+        <link rel="stylesheet" href="../static/css/sidebar.css" />
+        <link rel="stylesheet" href="../static/css/reset.css" />
+        <linkf
+            href="https://fonts.googleapis.com/css?family=Source Sans Pro"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
+            rel="stylesheet"
+        />
+        <title>Nura Rating</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="../static/img/Logo Nura Slogan.png"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    </head>
+    <body id="main" style="display: block" class="main">
+        <div id="header"></div>
+        <div id="sidebar"></div>
+        <div id="form" style="display: none">
+            <div id="form_info">
+                <div class="closeButton" onclick="closeWindow('form')">
+                    <img src="../static/img/close.svg" />
+                </div>
+                <div id="form_input"></div>
+            </div>
+        </div>
+        <div id="content">
+            <div class="setting">
+                <button class="btn3" onclick="openAdd()">
+                    Thêm thông tin bác sĩ
+                </button>
+            </div>
+            <div class="information">
+                <div class="table">
+                    <table id="item_info"></table>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../static/js/tool.js"></script>
+    <script src="../static/js/sidebar.js"></script>
+    <script src="../static/js/auth.js"></script>
+    <script src="./doctor.js"></script>
+</html>

@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./static/css/main.css" />
-    <link rel="stylesheet" href="./static/css/mess.css" />
+    <link rel="stylesheet" href="../static/css/reset.css" />
+    <link rel="stylesheet" href="../static/css/main.css" />
+    <link rel="stylesheet" href="../static/css/mess.css" />
     <link rel="stylesheet" href="./general.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Source Sans Pro"
@@ -14,42 +15,49 @@
       href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
     <title>Nura Rating</title>
     <link
       rel="icon"
       type="image/x-icon"
-      href="./static/img/Logo Nura Slogan.png"
+      href="../static/img/Logo Nura Slogan.png"
     />
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
-  <body id="main" style="">
-    <div class="content">
-      <div class="title">
-        <div class="title_head">
-          <div class="title_logo">
-            <img
-              class="title_logo_img"
-              src="../static/img/title_logo.jpeg"
-              alt=""
-            />
+  <body id="main" >
+    <div class="main_content">
+      <div class="content">
+        <div class="title">
+          <div class="title_head">
+            <div class="title_logo">
+              <img
+                class="title_logo_img"
+                src="../static/img/title_logo.jpeg"
+                alt=""
+              />
+            </div>
+            <div class="title_content">
+              <h1>Mẫu đánh giá Nura (Việt Nam)</h1>
+            </div>
           </div>
-          <div class="title_content">
-            <h1>Mẫu đánh giá Nura (Việt Nam)</h1>
+          <div class="title_info">
+            Cảm ơn bạn đã ghé thăm NURA. Chúng tôi cố gắng hết sức để giúp bạn cảm
+            thấy thoải mái và duy trì bầu không khí thân thiện, nơi bạn có thể nói
+            chuyện với chúng tôi về những lo lắng của mình. Chúng tôi hy vọng bạn
+            có trải nghiệm tốt với chúng tôi. Vui lòng chia sẻ phản hồi của bạn vì
+            nó sẽ giúp chúng tôi cải thiện dịch vụ của mình.
           </div>
         </div>
-        <div class="title_info">
-          Cảm ơn bạn đã ghé thăm NURA. Chúng tôi cố gắng hết sức để giúp bạn cảm
-          thấy thoải mái và duy trì bầu không khí thân thiện, nơi bạn có thể nói
-          chuyện với chúng tôi về những lo lắng của mình. Chúng tôi hy vọng bạn
-          có trải nghiệm tốt với chúng tôi. Vui lòng chia sẻ phản hồi của bạn vì
-          nó sẽ giúp chúng tôi cải thiện dịch vụ của mình.
+        <div class="question">
+          <div id="question_content"></div>
+          <div style="margin-top: 20px;"><button class="btn3" onclick="ratingConfirm()">Xác nhận</button></div>
         </div>
-      </div>
-      <div class="question">
-        <div id="question_content"></div>
       </div>
     </div>
+    
   </body>
 </html>
-
+<script src="../static/js/auth.js"></script>
 <script src="./genneral.js"></script>
+<script src="../static/js/tool.js"></script>

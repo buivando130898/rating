@@ -113,10 +113,64 @@ class api extends restful_api
             $conn->query($sql);
             $conn->close();
 
-            $this->response(200, $data[0]);
+            $this->response(200, $data);
         }
     }
 
+    function get_rating_point()
+    {
+        $user =  tokenLogin($_GET["token"]);
+        $data = [];
+        if ($this->method == 'GET' && $user) {
+            include('connect.php');
+            $dateBegin = $_GET['dateBegin'];
+            $dateEnd = $_GET['dateEnd'];
+            $point = $_GET['point'];
+            $sql = "SELECT * FROM rt_rating WHERE point = $point AND date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd'";
+            // echo $sql;
+            // rt_log($user["user"], "add_customer", $sql, $time);
+            mysqli_set_charset($conn, 'UTF8');
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+            $conn->query($sql);
+            $conn->close();
+
+            $this->response(200, $data);
+        }
+    }
+
+    function get_view_rating()
+    {
+        $user =  tokenLogin($_GET["token"]);
+        $data = [];
+        if ($this->method == 'GET' && $user) {
+            include('connect.php');
+            $dateBegin = $_GET['dateBegin'];
+            $dateEnd = $_GET['dateEnd'];
+            $point = $_GET['point'];
+            if ($point != 'null') {
+                $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' AND point = $point";
+            } else {
+                $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' AND point is NULL";
+            }
+            // echo $sql;
+            // rt_log($user["user"], "add_customer", $sql, $time);
+            mysqli_set_charset($conn, 'UTF8');
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+            $conn->query($sql);
+            $conn->close();
+            $this->response(200, $data);
+        }
+    }
 
     function get_view_doctor()
     {
@@ -155,7 +209,7 @@ class api extends restful_api
             include('connect.php');
             $dateBegin = $_GET['dateBegin'];
             $dateEnd = $_GET['dateEnd'];
-            $sql = "SELECT  doctor, AVG(point) as pointAVG, COUNT(doctor) AS countDoctor FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' GROUP BY doctor";
+            $sql = "SELECT doctor, AVG(point) AS pointAVG, COUNT(doctor) AS countDoctor FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' GROUP BY doctor ORDER BY pointAVG DESC;";
             // echo $sql;
             // rt_log($user["user"], "add_customer", $sql, $time);
             mysqli_set_charset($conn, 'UTF8');

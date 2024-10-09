@@ -1,117 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/css/main.css" />
-    <link rel="stylesheet" href="../static/css/mess.css" />
-    <link rel="stylesheet" href="./dashboard.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Source Sans Pro"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
-      rel="stylesheet"
-    />
-    <title>Nura Rating</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="../static/img/Logo Nura Slogan.png"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-  </head>
-  <body id="main" style="display: block; padding: 20px" class="main">
-    <div class="conten_message" id="viewDoctor" style="display: none">
-      <div class="form_info">
-        <div class="closeButton" onclick="closeWindow('viewDoctor')">
-          <img src="../static/img/close.svg" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../static/css/main.css" />
+        <link rel="stylesheet" href="../static/css/mess.css" />
+        <link rel="stylesheet" href="./dashboard.css" />
+        <link rel="stylesheet" href="../static/css/sidebar.css" />
+        <linkf
+            href="https://fonts.googleapis.com/css?family=Source Sans Pro"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
+            rel="stylesheet"
+        />
+        <title>Nura Rating</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="../static/img/Logo Nura Slogan.png"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    </head>
+    <body id="main" style="display: block" class="main">
+        <div id="header"></div>
+        <div id="sidebar"></div>
+        <div id="content">
+            <div id="form" style="display: none">
+                <div id="form_info">
+                    <div class="closeButton" onclick="closeWindow('form')">
+                        <img src="../static/img/close.svg" />
+                    </div>
+                    <div id="form_input"></div>
+                </div>
+            </div>
+            <div class="conten_message" id="viewDoctor" style="display: none">
+                <div class="form_info">
+                    <div
+                        class="closeButton"
+                        onclick="closeWindow('viewDoctor')"
+                    >
+                        <img src="../static/img/close.svg" />
+                    </div>
+                    <div class="table">
+                        <table id="view-doctor"></table>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="baner"
+                style="justify-content: flex-start; align-items: self-start"
+            >
+                <!-- <div class="logout zoomName" id="fullNone2" onclick="logout()">
+          Đăng xuất
+        </div> -->
+            </div>
+            <div class="check">
+                <div class="check-item">
+                    Từ:
+                    <input
+                        type="date"
+                        style="min-width: 100px"
+                        class="input__style"
+                        name=""
+                        value=""
+                        id="dateBegin"
+                    />
+                    Đến:
+                    <input
+                        type="date"
+                        style="min-width: 100px"
+                        class="input__style"
+                        name=""
+                        value=""
+                        id="dateEnd"
+                    />
+                    <!-- <select name="" id="monthSelect" class="input__style">
+            <option value="1">Tháng 1</option>
+            <option value="2">Tháng 2</option>
+            <option value="3">Tháng 3</option>
+            <option value="4">Tháng 4</option>
+            <option value="5">Tháng 5</option>
+            <option value="6">Tháng 6</option>
+            <option value="7">Tháng 7</option>
+            <option value="8">Tháng 8</option>
+            <option value="9">Tháng 9</option>
+            <option value="10">Tháng 10</option>
+            <option value="11">Tháng 11</option>
+            <option value="12">Tháng 12</option>
+          </select> -->
+                </div>
+                <div class="check-item" style="margin-left: 10px">
+                    <button class="btn3" onclick="infoRating()">
+                        Đánh giá chung
+                    </button>
+                    <button class="btn3" onclick="infoDoctor()">
+                        Đánh giá theo bác sĩ
+                    </button>
+                </div>
+            </div>
+            <div id="all_ratting">
+                <!-- <div class="ratingItem"></div> -->
+                <div class="ratingItem">
+                    <img src="../static/img/all.svg" alt="" width="50px" />
+                    <span class="quan_rating" id="All">0</span>
+                </div>
+                <div class="ratingItem" onclick="viewRating(1)">
+                    <img src="../static/img/angry.svg" alt="" width="50px" />
+                    <span class="quan_rating" id="Rất không hài lòng">0</span>
+                </div>
+                <div class="ratingItem" onclick="viewRating(2)">
+                    <img src="../static/img/sad.svg" alt="" width="50px" />
+                    <span class="quan_rating" id="Không hài lòng">0</span>
+                </div>
+                <div class="ratingItem" onclick="viewRating(3)">
+                    <img src="../static/img/glad.svg" alt="" width="50px" />
+                    <span class="quan_rating" id="Bình thường">0</span>
+                </div>
+                <div class="ratingItem" onclick="viewRating(4)">
+                    <img src="../static/img/great.svg" alt="" width="50px" />
+                    <span class="quan_rating" id="Hài lòng">0</span>
+                </div>
+                <div class="ratingItem" onclick="viewRating(5)">
+                    <img src="../static/img/love.svg" alt="" width="50px" />
+                    <span class="quan_rating" id="Rất hài lòng">0</span>
+                </div>
+            </div>
+            <div>
+                <div class="table">
+                    <table id="ratingTable"></table>
+                    <table
+                        id="ratingDoctor"
+                        style="display: none; width: 100%"
+                    ></table>
+                </div>
+            </div>
         </div>
-        <div class="table">
-          <table id="view-doctor"></table>
-        </div>
-      </div>
-    </div>
-    <div
-      class="baner"
-      style="justify-content: flex-start; align-items: self-start"
-    >
-      <div>
-        <img
-          src="../static/img/Logo Nura Slogan.png"
-          alt=""
-          class="logo"
-          style="width: 150px"
-        />
-      </div>
-
-      <div class="logout zoomName" id="fullNone2" onclick="logout()">
-        Đăng xuất
-      </div>
-    </div>
-    <div class="check">
-      <div class="check-item">
-        Từ:
-        <input
-          type="date"
-          style="min-width: 100px"
-          class="input__style"
-          name=""
-          value=""
-          id="dateBegin"
-        />
-        Đến:
-        <input
-          type="date"
-          style="min-width: 100px"
-          class="input__style"
-          name=""
-          value=""
-          id="dateEnd"
-        />
-      </div>
-      <div class="check-item" style="margin-left: 10px">
-        <button class="btn3" onclick="infoRating()">Đánh giá chung</button>
-        <button class="btn3" onclick="infoDoctor()">
-          Đánh giá theo bác sĩ
-        </button>
-      </div>
-    </div>
-    <div id="all_ratting">
-      <!-- <div class="ratingItem"></div> -->
-      <div class="ratingItem">
-        <img src="../static/img/all.svg" alt="" width="50px" />
-        <span class="quan_rating" id="All">0</span>
-      </div>
-      <div class="ratingItem">
-        <img src="../static/img/angry.svg" alt="" width="50px" />
-        <span class="quan_rating" id="Rất không hài lòng">0</span>
-      </div>
-      <div class="ratingItem">
-        <img src="../static/img/sad.svg" alt="" width="50px" />
-        <span class="quan_rating" id="Không hài lòng">0</span>
-      </div>
-      <div class="ratingItem">
-        <img src="../static/img/glad.svg" alt="" width="50px" />
-        <span class="quan_rating" id="Bình thường">0</span>
-      </div>
-      <div class="ratingItem">
-        <img src="../static/img/great.svg" alt="" width="50px" />
-        <span class="quan_rating" id="Hài lòng">0</span>
-      </div>
-      <div class="ratingItem">
-        <img src="../static/img/love.svg" alt="" width="50px" />
-        <span class="quan_rating" id="Rất hài lòng">0</span>
-      </div>
-    </div>
-    <div>
-      <div class="table">
-        <table id="ratingTable"></table>
-        <table id="ratingDoctor" style="display: none; width: 100%"></table>
-      </div>
-    </div>
-  </body>
-  <script src="../static/js/auth.js"></script>
-  <script src="./dashboard.js"></script>
+    </body>
+    <script src="../static/js/sidebar.js"></script>
+    <script src="../static/js/auth.js"></script>
+    <script src="./dashboard.js"></script>
 </html>

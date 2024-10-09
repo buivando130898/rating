@@ -12,9 +12,9 @@ body {
     padding: 0px;
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
     color: rgb(61, 86, 106);
-    font-family: Source Sans Pro, sans-serif;
+    font-family: "Bai Jamjuree", sans-serif;
 }
 
 .main {
@@ -27,9 +27,13 @@ h1, h2 {
     background-origin: padding-box;
     background-position-x: 0%;
     background-position-y: 0%;
-    background-repeat: repeat;
     background-size: auto;
     overflow:auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* color: rgba(0, 0, 0, 0.785); */
 }
 
 .zoom {
@@ -87,9 +91,9 @@ h1, h2 {
 }
 
 .rating-item {
-    width: 150px;
+    width: 160px;
     /* border: solid 1px rgb(250, 193, 65); */
-    padding: 0px 20px;
+    padding: 10px 20px;
     background-color: #ffffff;
     border-radius: 10px;
     /* box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); */
@@ -237,4 +241,8 @@ td {
 tr {
     background-color: #ffffff;
     border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+
+td, th {
+    max-width: 400px !important;
 }

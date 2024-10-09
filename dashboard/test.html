@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Biểu đồ nguồn giới thiệu khách hàng</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            /* Căn giữa biểu đồ và tạo hiệu ứng đổ bóng */
+            .chart-container {
+                width: 80%;
+                max-width: 800px;
+                margin: 40px auto;
+                background-color: #f9f9f9;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                padding: 20px;
+                position: relative;
+            }
+
+            /* Đặt chiều cao cố định cho canvas để tránh bị trôi */
+            #referralChart {
+                max-height: 400px;
+            }
+
+            /* Tăng khoảng cách giữa các phần tử */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #eaeaea;
+                color: #333;
+            }
+
+            /* Tùy chỉnh cho tiêu đề biểu đồ */
+            h2 {
+                text-align: center;
+                font-size: 24px;
+                color: #333;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="chart-container">
+            <h2>Biểu đồ nguồn giới thiệu khách hàng</h2>
+            <canvas id="referralChart"></canvas>
+        </div>
+
+        <script>
+            // Dữ liệu mẫu với 4 nguồn
+            const referralData = [
+                {
+                    source: 'Internet/Mạng Xã hội/Truyền thông quảng cáo của Nura',
+                    source_count: '4',
+                },
+                {
+                    source: 'Người thân/bạn bè giới thiệu',
+                    source_count: '63',
+                },
+                {
+                    source: 'Quảng cáo truyền hình',
+                    source_count: '10',
+                },
+                {
+                    source: 'Tờ rơi/ấn phẩm',
+                    source_count: '8',
+                },
+            ];
+
+            // Lấy nhãn (labels) và dữ liệu (data) từ referralData
+            const labels = referralData.map((item) => item.source);
+            const data = referralData.map((item) =>
+                parseInt(item.source_count, 10)
+            ); // Chuyển đổi thành số nguyên
+
+            // Tự động sinh màu cho mỗi phần của biểu đồ
+            const backgroundColors = [
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)',
+            ];
+
+            const borderColors = [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+            ];
+
+            // Cấu hình biểu đồ
+            const ctx = document
+                .getElementById('referralChart')
+                .getContext('2d');
+            const referralChart = new Chart(ctx, {
+                type: 'pie', // Biểu đồ hình tròn
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor: backgroundColors.slice(
+                                0,
+                                referralData.length
+                            ), // Lấy số màu tương ứng với số lượng nguồn
+                            borderColor: borderColors.slice(
+                                0,
+                                referralData.length
+                            ), // Lấy số viền tương ứng
+                            borderWidth: 2,
+                        },
+                    ],
+                },
+                options: {
+                    maintainAspectRatio: false, // Điều chỉnh tỷ lệ biểu đồ
+                    plugins: {
+                        legend: {
+                            display: false, // Tắt hiển thị nhãn
+                        },
+                    },
+                    layout: {
+                        padding: {
+                            top: 20,
+                            bottom: 30,
+                        },
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
