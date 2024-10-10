@@ -1,9 +1,9 @@
 var menu_data = [
-    {
-        name: 'Đánh giá bác sĩ',
-        link: '../dashboard',
-        id: 'dashboard',
-    },
+    // {
+    //     name: 'Đánh giá bác sĩ',
+    //     link: '../dashboard',
+    //     id: 'dashboard',
+    // },
     {
         name: 'Đánh giá chung',
         link: '../dashboard/general.html',

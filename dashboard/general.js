@@ -792,6 +792,40 @@ function info_customer_age() {
 var customerChart;
 
 function info_customer_week() {
+    let dateBegin = getValue('dateBegin');
+    let dateEnd = getValue('dateEnd');
+
+    data = {
+        dateBegin,
+        dateEnd,
+        token,
+    };
+    console.log(data);
+    axios
+        .get(
+            server + '/api/customer.php/info_customer_week',
+            { params: data },
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        )
+        .then(function (response) {
+            const data = response.data;
+            view_chart_customer_week(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+            alert('Đã xảy ra lỗi!1');
+        });
+}
+
+function view_chart_customer_week(data_week) {
+    console.log('Check');
+
+    console.log(data_week);
+
     // Dữ liệu mẫu từ câu truy vấn SQL
     const labels = [
         'Thứ Hai',
@@ -802,8 +836,32 @@ function info_customer_week() {
         'Thứ Bảy',
         'Chủ Nhật',
     ];
-    const data = [15, 12, 18, 10, 20, 25, 5]; // Dữ liệu trung bình số lượng khách hàng theo ngày
-
+    const data = [0, 0, 0, 0, 0, 0, 0]; // Dữ liệu trung bình số lượng khách hàng theo ngày
+    data_week.forEach((item) => {
+        switch (item.day_of_week) {
+            case 'Monday':
+                data[0] = parseInt(item.average_customers, 10);
+                break;
+            case 'Tuesday':
+                data[1] = parseInt(item.average_customers, 10);
+                break;
+            case 'Wednesday':
+                data[2] = parseInt(item.average_customers, 10);
+                break;
+            case 'Thursday':
+                data[3] = parseInt(item.average_customers, 10);
+                break;
+            case 'Friday':
+                data[4] = parseInt(item.average_customers, 10);
+                break;
+            case 'Saturday':
+                data[5] = parseInt(item.average_customers, 10);
+                break;
+            case 'Sunday':
+                data[6] = parseInt(item.average_customers, 10);
+                break;
+        }
+    });
     // Cấu hình biểu đồ
     const ctx = document.getElementById('customerChart').getContext('2d');
     if (customerChart) {

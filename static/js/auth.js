@@ -1,4 +1,4 @@
-// server = "http://localhost:8080/rating";
+// server = 'http://localhost:8080/rating';
 server = 'https://ratingnura.nura.com.vn';
 
 function logout() {

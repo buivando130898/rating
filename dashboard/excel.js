@@ -1,4 +1,4 @@
-var tokenlogin = localStorage["token_login"];
+var tokenlogin = localStorage['token_login'];
 var data_excel;
 function formatDate(dateStr) {
     try {
@@ -6,17 +6,23 @@ function formatDate(dateStr) {
         const [day, month, year] = dateStr.split('/');
 
         // Chuyển đổi năm thành dạng 4 chữ số nếu cần
-        const fullYear = year.length === 2 ? (parseInt(year, 10) < 50 ? '20' + year : '19' + year) : year;
+        const fullYear =
+            year.length === 2
+                ? parseInt(year, 10) < 50
+                    ? '20' + year
+                    : '19' + year
+                : year;
 
         // Tạo đối tượng ngày với định dạng: YYYY-MM-DD
-        const formattedDate = `${fullYear}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        const formattedDate = `${fullYear}-${month.padStart(
+            2,
+            '0'
+        )}-${day.padStart(2, '0')}`;
 
         return formattedDate;
     } catch (error) {
-        return false
+        return false;
     }
-    
-
 }
 
 var ExcelToJSON = function () {
@@ -29,7 +35,9 @@ var ExcelToJSON = function () {
             });
             workbook.SheetNames.forEach(function (sheetName) {
                 // Here is your object
-                var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                var XL_row_object = XLSX.utils.sheet_to_row_object_array(
+                    workbook.Sheets[sheetName]
+                );
                 var json_object = JSON.stringify(XL_row_object);
                 // console.log(JSON.parse(json_object));
                 data_excel = JSON.parse(json_object);
@@ -49,13 +57,17 @@ function handleFileSelect(evt) {
     var xl2json = new ExcelToJSON();
     xl2json.parseExcel(files[0]);
 }
-document.getElementById('fileUpload').addEventListener('change', handleFileSelect, false);
+document
+    .getElementById('fileUpload')
+    .addEventListener('change', handleFileSelect, false);
 
 function convertToDate(dateString) {
-        const parts = dateString.split(/[/ :]/); // Tách chuỗi theo dấu '/', khoảng trắng và ':'
-        // Sắp xếp lại chuỗi với định dạng 'mm/dd/yyyy hh:mm:ss'
-        return new Date(`${parts[1]}/${parts[0]}/${parts[2]} ${parts[3]}:${parts[4]}:${parts[5]}`);
-    }
+    const parts = dateString.split(/[/ :]/); // Tách chuỗi theo dấu '/', khoảng trắng và ':'
+    // Sắp xếp lại chuỗi với định dạng 'mm/dd/yyyy hh:mm:ss'
+    return new Date(
+        `${parts[1]}/${parts[0]}/${parts[2]} ${parts[3]}:${parts[4]}:${parts[5]}`
+    );
+}
 
 // Update file
 function upload() {
@@ -63,18 +75,22 @@ function upload() {
         i = 0;
         max = data_excel.length;
         notification = '';
-        document.getElementById('import_notification').innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
+        document.getElementById(
+            'import_notification'
+        ).innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
 
         const myImport = setInterval(() => {
             if (i == max) {
                 console.log('notification: ');
                 console.log(notification);
                 if (!notification) {
-                    document.getElementById('import_notification').innerHTML = 'Import  thành công';
+                    document.getElementById('import_notification').innerHTML =
+                        'Import  thành công';
                     // date_info();
                     clearInterval(myImport);
                 } else {
-                    document.getElementById('import_notification').innerHTML = notification;
+                    document.getElementById('import_notification').innerHTML =
+                        notification;
                     clearInterval(myImport);
                 }
             } else {
@@ -84,39 +100,47 @@ function upload() {
                 };
                 console.log(data);
                 questionAll = {
-                        name: data.name,
-                        op_no: data.op_no,
-                        phone: data.phone,
-                        mail: data.mail,
-                        why: data.why,
-                        source: data.source,
-                        good: data.good,
-                        satisfied: data.satisfied,
-                        introduce: data.introduce,
-                        time_input: data.time_input,
-                        token
-                      }
-                        axios
-                        .post(server + '/api/general.php/add_general2', questionAll, {
+                    name: data.name,
+                    op_no: data.op_no,
+                    phone: data.phone,
+                    mail: data.mail,
+                    why: data.why,
+                    source: data.source,
+                    good: data.good,
+                    satisfied: data.satisfied,
+                    introduce: data.introduce,
+                    time_input: data.time_input,
+                    token,
+                };
+                axios
+                    .post(
+                        server + '/api/general.php/add_general2',
+                        questionAll,
+                        {
                             headers: {
                                 'Content-Type': 'multipart/form-data',
                             },
-                        })
-                        .then(function (response) {
-                            data = response.data;
-                            console.log(data);        
-                            if (data == true) {
-                                noti('success', 'Cám ơn quý khách đã để lại đánh giá');
-                            } else {
-                                noti('error', 'Đã xảy ra lỗi SQL');
-                            }
-                        })
-                        .catch(function (error) {
-                          
-                            noti('error', 'Đã xảy ra lỗi hệ thống');
-                        });
+                        }
+                    )
+                    .then(function (response) {
+                        data = response.data;
+                        console.log(data);
+                        if (data == true) {
+                            noti(
+                                'success',
+                                'Cám ơn quý khách đã để lại đánh giá'
+                            );
+                        } else {
+                            noti('error', 'Đã xảy ra lỗi SQL');
+                        }
+                    })
+                    .catch(function (error) {
+                        noti('error', 'Đã xảy ra lỗi hệ thống');
+                    });
                 i++;
-                document.getElementById('import_notification').innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
+                document.getElementById(
+                    'import_notification'
+                ).innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
             }
         }, 500);
     }
@@ -128,18 +152,22 @@ function upload2() {
         i = 0;
         max = data_excel.length;
         notification = '';
-        document.getElementById('import_notification').innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
+        document.getElementById(
+            'import_notification'
+        ).innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
 
         const myImport = setInterval(() => {
             if (i == max) {
                 console.log('notification: ');
                 console.log(notification);
                 if (!notification) {
-                    document.getElementById('import_notification').innerHTML = 'Import  thành công';
+                    document.getElementById('import_notification').innerHTML =
+                        'Import  thành công';
                     // date_info();
                     clearInterval(myImport);
                 } else {
-                    document.getElementById('import_notification').innerHTML = notification;
+                    document.getElementById('import_notification').innerHTML =
+                        notification;
                     clearInterval(myImport);
                 }
             } else {
@@ -148,7 +176,7 @@ function upload2() {
                     tokenlogin,
                 };
 
-                if(formatDate(data.Date)) {
+                if (formatDate(data.Date)) {
                     customerData = {
                         name: data.Name,
                         op_no: data['OP No'],
@@ -158,38 +186,44 @@ function upload2() {
                         age: data.Age,
                         address: data.Address,
                         remarks: data.Remarks,
-                        token
-                      }
-                      console.log(customerData);
+                        token,
+                    };
+                    console.log(customerData);
                     axios
-                    .post(server + '/api/customer.php/add_customer', customerData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    })
-                    .then(function (response) {
-                        data = response.data;
-                        console.log(data);        
-                        if (data == true) {
-                            noti('success', 'Cám ơn quý khách đã để lại đánh giá');
-                        } else {
-                            noti('error', 'Đã xảy ra lỗi SQL');
-                        }
-                    })
-                    .catch(function (error) {
-                      
-                        noti('error', 'Đã xảy ra lỗi hệ thống');
-                    });
+                        .post(
+                            server + '/api/customer.php/add_customer',
+                            customerData,
+                            {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                },
+                            }
+                        )
+                        .then(function (response) {
+                            data = response.data;
+                            console.log(data);
+                            if (data == true) {
+                                noti(
+                                    'success',
+                                    'Cám ơn quý khách đã để lại đánh giá'
+                                );
+                            } else {
+                                noti('error', 'Đã xảy ra lỗi SQL');
+                            }
+                        })
+                        .catch(function (error) {
+                            noti('error', 'Đã xảy ra lỗi hệ thống');
+                        });
                 }
-                      
 
                 i++;
-                document.getElementById('import_notification').innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
+                document.getElementById(
+                    'import_notification'
+                ).innerHTML = `<p>Vui lòng chờ đợi: ${i} / ${max}</p>`;
             }
         }, 500);
     }
 }
-
 
 // Xuaats file
 function ex_file_excel(name) {
