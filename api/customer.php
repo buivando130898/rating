@@ -201,21 +201,14 @@ class api extends restful_api
                 if ($this->method == 'GET' && $user) {
                         include('connect.php');
                         $sql = "
-                        SELECT 
-                        CASE DAYOFWEEK(examination_date)
-                                WHEN 2 THEN 'Monday'
-                                WHEN 3 THEN 'Tuesday'
-                                WHEN 4 THEN 'Wednesday'
-                                WHEN 5 THEN 'Thursday'
-                                WHEN 6 THEN 'Friday'
-                                WHEN 7 THEN 'Saturday'
-                                WHEN 1 THEN 'Sunday'
-                        END AS day_of_week,
-                        ROUND(COUNT(*) / COUNT(DISTINCT DATE(examination_date))) AS average_customers
-                        FROM rt_customer
-                        WHERE examination_date BETWEEN '$dateBegin' AND '$dateEnd'
-                        GROUP BY DAYOFWEEK(examination_date)
-                        ORDER BY FIELD(day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+                                SELECT 
+                                DAYNAME(examination_date) AS day_of_week,
+                                ROUND(COUNT(*) / COUNT(DISTINCT DATE(examination_date)), 2) AS average_customers
+                                FROM rt_customer
+                                WHERE examination_date BETWEEN '$dateBegin' AND '$dateEnd'
+                                GROUP BY day_of_week
+                                ORDER BY FIELD(day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+
                         ";
                         // echo $sql;
                         mysqli_set_charset($conn, 'UTF8');
