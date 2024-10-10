@@ -1,106 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./static/css/main.css" />
-    <link rel="stylesheet" href="./static/css/mess.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Source Sans Pro"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
-      rel="stylesheet"
-    />
-    <title>Nura Rating</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="./static/img/Logo Nura Slogan.png"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-  </head>
-  <body id="main" style="display: none">
-    <div class="conten_message" id="conten_message" style="display: none">
-      <div class="form_info">
-        <!-- <div class="closeButton" onclick="closeWindow('conten_message')">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./static/css/main.css" />
+        <link rel="stylesheet" href="./static/css/mess.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Source Sans Pro"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&amp;display=swap"
+            rel="stylesheet"
+        />
+        <title>Nura Rating</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="./static/img/Logo Nura Slogan.png"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    </head>
+    <body id="main" style="display: none">
+        <div class="conten_message" id="conten_message" style="display: none">
+            <div class="form_info">
+                <!-- <div class="closeButton" onclick="closeWindow('conten_message')">
           <img src="./static/img/close.svg" />
         </div> -->
-        <div class="conten_message_item">
-          <div>
-            <img style="width: 400px" src="./static/img/tuvan.png" alt="" />
-          </div>
-          <div class="thankYou">
-            <h1>Trung tâm tầm soát Công nghệ cao Nura</h1>
-            <h1>Cám ơn Quý khách đã sử dụng dịch vụ của chúng tôi!</h1>
-          </div>
-          <div style="width: 100%; height: 80px">
-            <textarea
-              style="width: 100%; height: 70px"
-              type="text"
-              class="input__style"
-              placeholder="Vui lòng để lại đánh giá của bạn nếu có thể"
-              rows="5"
-              id="mess"
-            ></textarea>
-          </div>
-          <div>
-            <button class="btn3" onclick="addRating()">Xác nhận</button>
-          </div>
+                <div class="conten_message_item">
+                    <div>
+                        <img
+                            style="width: 400px"
+                            src="./static/img/tuvan.png"
+                            alt=""
+                        />
+                    </div>
+                    <div class="thankYou">
+                        <h1>Trung tâm tầm soát Công nghệ cao Nura</h1>
+                        <h1>
+                            Cám ơn Quý khách đã sử dụng dịch vụ của chúng tôi!
+                        </h1>
+                    </div>
+                    <div style="width: 100%; height: 80px">
+                        <textarea
+                            style="width: 100%; height: 70px"
+                            type="text"
+                            class="input__style"
+                            placeholder="Vui lòng để lại đánh giá của bạn nếu có thể"
+                            rows="5"
+                            id="mess"
+                        ></textarea>
+                    </div>
+                    <div>
+                        <button class="btn3" onclick="addRating()">
+                            Xác nhận
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="conten_message" id="ratingDoctor" style="display: none">
-      <div class="form_info">
-        <div class="closeButton" onclick="closeWindow('ratingDoctor')">
-          <img src="./static/img/close.svg" />
-        </div>
-        <div class="conten_message_item">
-          <h1>Quý Khách vui lòng chọn phòng vừa tư vấn.</h1>
-          <div id="ratingDoctorBlock">
-            <div class="zoomID">
-              <!-- <label class="zoomNameLable" for="101">Phòng 101:</label>
+        <div class="conten_message" id="ratingDoctor" style="display: none">
+            <div class="form_info">
+                <div class="closeButton" onclick="closeWindow('ratingDoctor')">
+                    <img src="./static/img/close.svg" />
+                </div>
+                <div class="conten_message_item">
+                    <h1>Quý Khách vui lòng chọn phòng vừa tư vấn.</h1>
+                    <div id="ratingDoctorBlock">
+                        <div class="zoomID">
+                            <!-- <label class="zoomNameLable" for="101">Phòng 101:</label>
               <input
                 type="text"
                 class="input__style"
                 placeholder="Tên bác sĩ"
                 id="101"
               /> -->
-              <div class="zoomBlock" onclick="addRatingInfo('101')">
-                <p>Phòng khám: 101</p>
-                <p id="doctor101"></p>
-              </div>
-            </div>
-            <div class="zoomID">
-              <!-- <label class="zoomNameLable" for="102">Phòng 102:</label>
+                            <div
+                                class="zoomBlock"
+                                onclick="addRatingInfo('101')"
+                            >
+                                <p>Phòng khám: 101</p>
+                                <p id="doctor101"></p>
+                            </div>
+                        </div>
+                        <div class="zoomID">
+                            <!-- <label class="zoomNameLable" for="102">Phòng 102:</label>
               <input
                 type="text"
                 class="input__style"
                 placeholder="Tên bác sĩ"
                 id="102"
               /> -->
-              <div class="zoomBlock" onclick="addRatingInfo('102')">
-                <p>Phòng khám: 102</p>
-                <p id="doctor102"></p>
-              </div>
-            </div>
-            <div class="zoomID">
-              <!-- <label class="zoomNameLable" for="101">Phòng 103:</label>
+                            <div
+                                class="zoomBlock"
+                                onclick="addRatingInfo('102')"
+                            >
+                                <p>Phòng khám: 102</p>
+                                <p id="doctor102"></p>
+                            </div>
+                        </div>
+                        <div class="zoomID">
+                            <!-- <label class="zoomNameLable" for="101">Phòng 103:</label>
               <input
                 type="text"
                 class="input__style"
                 placeholder="Tên bác sĩ"
                 id="103"
               /> -->
-              <div class="zoomBlock" onclick="addRatingInfo('103')">
-                <p>Phòng khám: 103</p>
-                <p id="doctor103"></p>
-              </div>
-            </div>
-            <div class="zoomID">
-              <!-- <label
+                            <div
+                                class="zoomBlock"
+                                onclick="addRatingInfo('103')"
+                            >
+                                <p>Phòng khám: 103</p>
+                                <p id="doctor103"></p>
+                            </div>
+                        </div>
+                        <div class="zoomID">
+                            <!-- <label
                 class="zoomNameLable"
                 for="101"
                 onclick="addRatingInfo('104')"
@@ -112,179 +129,226 @@
                 placeholder="Tên bác sĩ"
                 id="104"
               /> -->
-              <div class="zoomBlock" onclick="addRatingInfo('104')">
-                <p>Phòng khám: 104</p>
-                <p id="doctor104"></p>
-              </div>
-            </div>
-          </div>
+                            <div
+                                class="zoomBlock"
+                                onclick="addRatingInfo('104')"
+                            >
+                                <p>Phòng khám: 104</p>
+                                <p id="doctor104"></p>
+                            </div>
+                        </div>
+                    </div>
 
-          <!-- <div style="margin-top: 20px">
+                    <!-- <div style="margin-top: 20px">
             <button class="btn3" onclick="updateZoomAll()">
               Update phòng khám
             </button>
           </div> -->
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="conten_message" id="ratingForm" style="display: none">
-      <div class="form_info">
-        <!-- <div class="closeButton" onclick="closeWindow('ratingForm')">
+        <div class="conten_message" id="ratingForm" style="display: none">
+            <div class="form_info">
+                <!-- <div class="closeButton" onclick="closeWindow('ratingForm')">
           <img src="./static/img/close.svg" />
         </div> -->
-        <div class="conten_message_item">
-          <h1>Thông tin phòng tư vấn</h1>
-          <div>
-            <div class="zoomID">
-              <label class="zoomNameLable" for="101">Phòng 101:</label>
+                <div class="conten_message_item">
+                    <h1>Thông tin phòng tư vấn</h1>
+                    <div>
+                        <div class="zoomID">
+                            <label class="zoomNameLable" for="101"
+                                >Phòng 101:</label
+                            >
 
-              <select id="101" class="input__style"></select>
+                            <select id="101" class="input__style"></select>
 
-              <!-- <input
+                            <!-- <input
                 type="text"
                 class="input__style"
                 placeholder="Tên bác sĩ"
                 id="101"
               /> -->
-              <!-- <button class="btn3" onclick="addRatingInfo('101')">
+                            <!-- <button class="btn3" onclick="addRatingInfo('101')">
                 Select
               </button> -->
-            </div>
-            <div class="zoomID">
-              <label class="zoomNameLable" for="102">Phòng 102:</label>
-              <select id="102" class="input__style"></select>
-              <!-- <input
+                        </div>
+                        <div class="zoomID">
+                            <label class="zoomNameLable" for="102"
+                                >Phòng 102:</label
+                            >
+                            <select id="102" class="input__style"></select>
+                            <!-- <input
                 type="text"
                 class="input__style"
                 placeholder="Tên bác sĩ"
                 id="102"
               /> -->
-              <!-- <button class="btn3" onclick="addRatingInfo('102')">
+                            <!-- <button class="btn3" onclick="addRatingInfo('102')">
                 Select
               </button> -->
-            </div>
-            <div class="zoomID">
-              <label class="zoomNameLable" for="103">Phòng 103:</label>
-              <select id="103" class="input__style"></select>
-              <!-- <input
+                        </div>
+                        <div class="zoomID">
+                            <label class="zoomNameLable" for="103"
+                                >Phòng 103:</label
+                            >
+                            <select id="103" class="input__style"></select>
+                            <!-- <input
                 type="text"
                 class="input__style"
                 placeholder="Tên bác sĩ"
                 id="103"
               /> -->
-              <!-- <button class="btn3" onclick="addRatingInfo('103')">
+                            <!-- <button class="btn3" onclick="addRatingInfo('103')">
                 Select
               </button> -->
-            </div>
-            <div class="zoomID">
-              <label
-                class="zoomNameLable"
-                for="104"
-                onclick="addRatingInfo('104')"
-                >Phòng 104:</label
-              >
-              <select id="104" class="input__style"></select>
-              <!-- <input
+                        </div>
+                        <div class="zoomID">
+                            <label
+                                class="zoomNameLable"
+                                for="104"
+                                onclick="addRatingInfo('104')"
+                                >Phòng 104:</label
+                            >
+                            <select id="104" class="input__style"></select>
+                            <!-- <input
                 type="text"
                 class="input__style"
                 placeholder="Tên bác sĩ"
                 id="104"
               /> -->
-              <!-- <button class="btn3" onclick="addRatingInfo('104')">
+                            <!-- <button class="btn3" onclick="addRatingInfo('104')">
                 Select
               </button> -->
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px">
+                        <button class="btn3" onclick="updateZoomAll()">
+                            Update phòng khám
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div style="margin-top: 20px">
-            <button class="btn3" onclick="updateZoomAll()">
-              Update phòng khám
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="main" id="main">
-      <div class="zoom" onclick="openRatingForm()">
-        <!-- <div><img src="./static/img/tuvan.png" alt="" /></div> -->
-        <div class="zoomName" style="display: none">
-          <div>Phòng tư vấn: <span id="zoomID"></span></div>
-          <div>BS: <span id="zoomDoctor"></span></div>
-        </div>
-      </div>
-      <div class="baner">
-        <div>
-          <img src="./static/img/Logo Nura Slogan.png" alt="" class="logo" />
-        </div>
-        <div>
-          <h1 style="margin-top: -10px">
-            Trung tâm tầm soát Công nghệ cao Nura
-          </h1>
-        </div>
-      </div>
-      <div class="rating">
-        <div class="rating-item" onclick="rating('Rất không hài lòng')">
-          <div class="rating-img">
-            <img src="./static/img/angry.svg" alt="" class="rating-icon" />
-          </div>
-          <div class="rating-content">
-            <h1 class="rating-text">Rất không hài lòng</h1>
-          </div>
         </div>
 
-        <div class="rating-item" onclick="rating('Không hài lòng')">
-          <div class="rating-img">
-            <img src="./static/img/sad.svg" alt="" class="rating-icon" />
-          </div>
-          <div class="rating-content">
-            <h1 class="rating-text">Không hài lòng</h1>
-          </div>
-        </div>
+        <div class="main" id="main">
+            <div class="zoom" onclick="openRatingForm()">
+                <!-- <div><img src="./static/img/tuvan.png" alt="" /></div> -->
+                <div class="zoomName" style="display: none">
+                    <div>Phòng tư vấn: <span id="zoomID"></span></div>
+                    <div>BS: <span id="zoomDoctor"></span></div>
+                </div>
+            </div>
+            <div class="baner">
+                <div>
+                    <img
+                        src="./static/img/Logo Nura Slogan.png"
+                        alt=""
+                        class="logo"
+                    />
+                </div>
+                <div>
+                    <h1 style="margin-top: -10px">
+                        Trung tâm tầm soát Công nghệ cao Nura
+                    </h1>
+                </div>
+            </div>
+            <div class="rating">
+                <div class="rating-item" onclick="rating('Rất không hài lòng')">
+                    <div class="rating-img">
+                        <img
+                            src="./static/img/angry.svg"
+                            alt=""
+                            class="rating-icon"
+                        />
+                    </div>
+                    <div class="rating-content">
+                        <h1 class="rating-text">Rất không hài lòng</h1>
+                    </div>
+                </div>
 
-        <div class="rating-item" onclick="rating('Bình thường')">
-          <div class="rating-img">
-            <img src="./static/img/glad.svg" alt="" class="rating-icon" />
-          </div>
-          <div class="rating-content">
-            <h1 class="rating-text">Bình thường</h1>
-          </div>
-        </div>
+                <div class="rating-item" onclick="rating('Không hài lòng')">
+                    <div class="rating-img">
+                        <img
+                            src="./static/img/sad.svg"
+                            alt=""
+                            class="rating-icon"
+                        />
+                    </div>
+                    <div class="rating-content">
+                        <h1 class="rating-text">Không hài lòng</h1>
+                    </div>
+                </div>
 
-        <div class="rating-item" onclick="rating('Hài lòng')">
-          <div class="rating-img">
-            <img src="./static/img/great.svg" alt="" class="rating-icon" />
-          </div>
-          <div class="rating-content">
-            <h1 class="rating-text">Hài lòng</h1>
-          </div>
+                <div class="rating-item" onclick="rating('Bình thường')">
+                    <div class="rating-img">
+                        <img
+                            src="./static/img/glad.svg"
+                            alt=""
+                            class="rating-icon"
+                        />
+                    </div>
+                    <div class="rating-content">
+                        <h1 class="rating-text">Bình thường</h1>
+                    </div>
+                </div>
+
+                <div class="rating-item" onclick="rating('Hài lòng')">
+                    <div class="rating-img">
+                        <img
+                            src="./static/img/great.svg"
+                            alt=""
+                            class="rating-icon"
+                        />
+                    </div>
+                    <div class="rating-content">
+                        <h1 class="rating-text">Hài lòng</h1>
+                    </div>
+                </div>
+                <div class="rating-item" onclick="rating('Rất hài lòng')">
+                    <div class="rating-img">
+                        <img
+                            src="./static/img/love.svg"
+                            alt=""
+                            class="rating-icon"
+                        />
+                    </div>
+                    <div class="rating-content">
+                        <h1 class="rating-text">Rất hài lòng</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="footer"></div>
         </div>
-        <div class="rating-item" onclick="rating('Rất hài lòng')">
-          <div class="rating-img">
-            <img src="./static/img/love.svg" alt="" class="rating-icon" />
-          </div>
-          <div class="rating-content">
-            <h1 class="rating-text">Rất hài lòng</h1>
-          </div>
+        <div
+            class="fullDisplay zoomName"
+            id="fullNone1"
+            onclick="fullDispaly()"
+            style="bottom: 160px"
+        >
+            <a href="./general" style="width: 100%; text-decoration: none"
+                >FeedBack</a
+            >
         </div>
-      </div>
-      <div class="footer"></div>
-    </div>
-    <div
-      class="fullDisplay zoomName"
-      id="fullNone0"
-      onclick='openFlex("ratingForm")'
-    >
-      Cập nhật TT Bác sĩ
-    </div>
-    <div class="fullDisplay zoomName" id="fullNone1" onclick="fullDispaly()">
-      Mở full màn hình
-    </div>
-    <div class="logout zoomName" id="fullNone2" onclick="logout()">
-      Đăng xuất
-    </div>
-  </body>
+        <div
+            class="fullDisplay zoomName"
+            id="fullNone0"
+            onclick='openFlex("ratingForm")'
+        >
+            Cập nhật TT Bác sĩ
+        </div>
+        <div
+            class="fullDisplay zoomName"
+            id="fullNone1"
+            onclick="fullDispaly()"
+        >
+            Mở full màn hình
+        </div>
+        <div class="logout zoomName" id="fullNone2" onclick="logout()">
+            Đăng xuất
+        </div>
+    </body>
 </html>
 
 <script src="./static/js/auth.js"></script>
