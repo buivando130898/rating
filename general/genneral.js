@@ -199,6 +199,9 @@ function ratingConfirm() {
                 console.log(data);
                 if (data == true) {
                     noti('success', 'Cám ơn quý khách đã để lại đánh giá');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
                 } else {
                     noti('error', 'Đã xảy ra lỗi SQL');
                 }
