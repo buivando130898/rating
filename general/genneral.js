@@ -183,7 +183,7 @@ function ratingConfirm() {
     why = getvalue('why');
     source = getValueRadio('source');
     good = getvalue('good');
-    alert(source);
+    // alert(source);
     questionAll = {
         ...questionAll,
         name,
