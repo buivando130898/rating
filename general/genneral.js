@@ -166,14 +166,24 @@ function getvalue(id) {
     return data;
 }
 
+function getValueRadio(id) {
+    const selectedRadio = document.querySelector(`input[name="${id}"]:checked`);
+
+    // Lấy giá trị của radio được chọn (nếu có)
+    const selectedValue = selectedRadio ? selectedRadio.value : 'Nguồn khác';
+
+    return selectedValue;
+}
+
 function ratingConfirm() {
     name = getvalue('name');
     op_no = getvalue('op_no');
     phone = getvalue('phone');
     mail = getvalue('mail');
     why = getvalue('why');
-    source = getvalue('source');
+    source = getValueRadio('source');
     good = getvalue('good');
+    alert(source);
     questionAll = {
         ...questionAll,
         name,
