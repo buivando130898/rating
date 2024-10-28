@@ -1,5 +1,5 @@
-// window.location.href = './general.html';
-// setMenu('dashboard');
+window.location.href = './general.html';
+setMenu('dashboard');
 function beginApp() {
     setDate();
     infoRating();

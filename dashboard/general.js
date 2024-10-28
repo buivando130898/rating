@@ -657,6 +657,7 @@ function infoDoctor() {
         <th>Bác sĩ</th>
         <th>Số lượng đánh giá</th>
         <th>Điểm</th>
+        <th>Tùy chỉnh</th>
       </tr>
       `;
             if (data.length > 0) {
@@ -667,6 +668,9 @@ function infoDoctor() {
               <td>${value.doctor}</td>
               <td>${value.countDoctor}</td>
               <td>${value.pointAVG}</td>
+            <td><button onclick="viewDoctor('${
+                value.doctor
+            }')">Xem</button></td>
             </tr>
           `;
                 }
@@ -713,6 +717,68 @@ function info_customer() {
                 data.male_customers;
             document.getElementById('Khách nữ').innerHTML =
                 data.female_customers;
+        })
+        .catch(function (error) {
+            console.log(error);
+            alert('Đã xảy ra lỗi!');
+        });
+}
+
+function viewDoctor(name) {
+    document.getElementById('view-doctor2').innerHTML = '';
+    let dateBegin = getValue('dateBegin');
+    let dateEnd = getValue('dateEnd');
+
+    localStorage.setItem('dateBegin', dateBegin);
+    localStorage.setItem('dateEnd', dateEnd);
+    data = {
+        dateBegin,
+        dateEnd,
+        name,
+        token,
+    };
+    console.log(data);
+    axios
+        .get(
+            server + '/api/user.php/get_view_doctor',
+            { params: data },
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        )
+        .then(function (response) {
+            data = response.data;
+            console.log(data);
+            // document.getElementById('ratingTable').innerHTML;
+            stt = 1;
+            table = `
+                    <tr>
+                        <th>STT</th>
+                        <th>Phòng</th>
+                        <th>Bác sĩ</th>
+                        <th>Đánh giá</th>
+                        <th>Góp ý</th>
+                        <th>Thời gian</th>
+                    </tr>
+                    `;
+            if (data.length > 0) {
+                for (value of data) {
+                    table += `
+            <tr>
+              <td>${stt++}</td>
+              <td>${value.zoom}</td>
+              <td>${value.doctor}</td>
+              <td>${value.content}</td>
+              <td>${value.mess ? value.mess : ''}</td>
+              <td>${value.timeInput}</td>
+            </tr>
+          `;
+                }
+            }
+            document.getElementById('view-doctor2').innerHTML = table;
+            openFlex('viewDoctor2');
         })
         .catch(function (error) {
             console.log(error);
