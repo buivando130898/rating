@@ -133,7 +133,7 @@ class api extends restful_api
                         $dateBegin = $_GET['dateBegin'];
                         $dateEnd = $_GET['dateEnd'];
                         include('connect.php');
-                        $sql = "SELECT source, COUNT(*) AS source_count FROM rt_general WHERE time_input BETWEEN '$dateBegin' AND '$dateEnd' GROUP BY source";
+                        $sql = "SELECT source, COUNT(*) AS source_count FROM rt_general WHERE time_input BETWEEN '$dateBegin' AND '$dateEnd' GROUP BY source ORDER BY source ASC;";
                         mysqli_set_charset($conn, 'UTF8');
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
