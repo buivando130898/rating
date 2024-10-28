@@ -126,7 +126,7 @@ var contentPoint = [
 ];
 
 function point_reset() {
-    for (value of contentPoint) {
+    for (let value of contentPoint) {
         document.getElementById(value).innerHTML = 0;
     }
 }
