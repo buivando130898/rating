@@ -162,6 +162,8 @@ function check() {
 }
 
 function getvalue(id) {
+    console.log(id);
+
     const data = document.querySelector(`input[name="${id}"]`).value;
     return data;
 }
