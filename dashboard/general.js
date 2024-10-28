@@ -75,6 +75,7 @@ function checkColorRating(rating) {
 }
 
 function rattingSynthetic() {
+    point_reset();
     let dateBegin = getValue('dateBegin');
     let dateEnd = getValue('dateEnd');
     data = {
@@ -123,6 +124,12 @@ var contentPoint = [
     'Hài lòng',
     'Rất hài lòng',
 ];
+
+function point_reset() {
+    for (value of contentPoint) {
+        document.getElementById(value).innerHTML = 0;
+    }
+}
 
 function CheckPoint(value) {
     for (let i = 0; i < 5; i++) {
