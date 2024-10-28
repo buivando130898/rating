@@ -126,6 +126,13 @@ var contentPoint = [
 ];
 
 function point_reset() {
+    var contentPoint = [
+        'Rất không hài lòng',
+        'Không hài lòng',
+        'Bình thường',
+        'Hài lòng',
+        'Rất hài lòng',
+    ];
     for (let value of contentPoint) {
         document.getElementById(value).innerHTML = 0;
     }
