@@ -182,9 +182,9 @@ class api extends restful_api
             $dateEnd = $_GET['dateEnd'];
             $name = $_GET['name'];
             if ($name != 'null') {
-                $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' AND doctor = '$name'";
+                $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' AND doctor = '$name' ORDER BY point ASC;";
             } else {
-                $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' AND doctor is NULL";
+                $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' AND doctor is NULL ORDER BY point ASC;";
             }
             // echo $sql;
             // rt_log($user["user"], "add_customer", $sql, $time);
