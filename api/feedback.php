@@ -61,7 +61,7 @@ class api extends restful_api
                         $dateBegin = $_GET['dateBegin'];
                         $dateEnd = $_GET['dateEnd'];
                         include('connect.php');
-                        $sql = "SELECT * FROM rt_general WHERE date(time_input) >= '$dateBegin' AND date(time_input) <= '$dateEnd'";
+                        $sql = "SELECT * FROM rt_general WHERE date(time_input) >= '$dateBegin' AND date(time_input) <= '$dateEnd' ORDER BY time_input DESC;";
                         // echo $sql;
                         mysqli_set_charset($conn, 'UTF8');
                         $result = $conn->query($sql);
@@ -85,7 +85,7 @@ class api extends restful_api
                         $dateBegin = $_GET['dateBegin'];
                         $dateEnd = $_GET['dateEnd'];
                         include('connect.php');
-                        $sql = "SELECT * FROM rt_general WHERE date(time_input) >= '$dateBegin' AND date(time_input) <= '$dateEnd' AND good <> '' AND good IS NOT NULL";
+                        $sql = "SELECT * FROM rt_general WHERE date(time_input) >= '$dateBegin' AND date(time_input) <= '$dateEnd' AND good <> '' AND good IS NOT NULL ORDER BY satisfied, introduce ASC;";
                         // echo $sql;
                         mysqli_set_charset($conn, 'UTF8');
                         $result = $conn->query($sql);
@@ -109,7 +109,7 @@ class api extends restful_api
                         $dateBegin = $_GET['dateBegin'];
                         $dateEnd = $_GET['dateEnd'];
                         include('connect.php');
-                        $sql = "SELECT * FROM rt_general WHERE date(time_input) >= '$dateBegin' AND date(time_input) <= '$dateEnd' AND why <> '' AND why IS NOT NULL";
+                        $sql = "SELECT * FROM rt_general WHERE date(time_input) >= '$dateBegin' AND date(time_input) <= '$dateEnd' AND why <> '' AND why IS NOT NULL ORDER BY satisfied, introduce ASC";
                         // echo $sql;
                         mysqli_set_charset($conn, 'UTF8');
                         $result = $conn->query($sql);

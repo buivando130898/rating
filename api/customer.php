@@ -154,7 +154,7 @@ class api extends restful_api
                         $dateBegin = $_GET['dateBegin'];
                         $dateEnd = $_GET['dateEnd'];
                         include('connect.php');
-                        $sql = "SELECT * FROM rt_customer WHERE date(examination_date) >= '$dateBegin' AND date(examination_date) <= '$dateEnd'";
+                        $sql = "SELECT * FROM rt_customer WHERE date(examination_date) >= '$dateBegin' AND date(examination_date) <= '$dateEnd' ORDER BY examination_date DESC ";
                         // echo $sql;
                         mysqli_set_charset($conn, 'UTF8');
                         $result = $conn->query($sql);

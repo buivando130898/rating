@@ -100,7 +100,7 @@ class api extends restful_api
             include('connect.php');
             $dateBegin = $_GET['dateBegin'];
             $dateEnd = $_GET['dateEnd'];
-            $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd'";
+            $sql = "SELECT * FROM rt_rating WHERE date(timeInput) >= '$dateBegin' AND date(timeInput) <= '$dateEnd' ORDER BY timeInput DESC";
             // echo $sql;
             // rt_log($user["user"], "add_customer", $sql, $time);
             mysqli_set_charset($conn, 'UTF8');

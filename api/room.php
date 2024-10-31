@@ -49,7 +49,7 @@ class api extends restful_api
             $office  = $_POST['office'];
             $note = $_POST['note'];
 
-            $sql = "INSERT INTO rt_doctor(name, office, note, time_input) VALUE ( '$name', '$office', '$note', '$time')";
+            $sql = "INSERT INTO rt_doctor(name, office, note, timeInput) VALUE ( '$name', '$office', '$note', '$time')";
             mysqli_set_charset($conn, 'UTF8');
             $conn->query($sql);
             $conn->close();
