@@ -114,23 +114,33 @@ class api extends restful_api
                         $sql = "
                                 SELECT 
                                 CASE
-                                        WHEN age BETWEEN 10 AND 19 THEN '10-19'
-                                        WHEN age BETWEEN 20 AND 29 THEN '20-29'
-                                        WHEN age BETWEEN 30 AND 39 THEN '30-39'
-                                        WHEN age BETWEEN 40 AND 49 THEN '40-49'
-                                        WHEN age BETWEEN 50 AND 59 THEN '50-59'
-                                        WHEN age BETWEEN 60 AND 69 THEN '60-69'
-                                        WHEN age BETWEEN 70 AND 79 THEN '70-79'
-                                        WHEN age BETWEEN 80 AND 89 THEN '80-89'
-                                        WHEN age BETWEEN 90 AND 100 THEN '90-100'
-                                        ELSE 'Khác' -- Trường hợp tuổi không nằm trong khoảng từ 10 đến 100
+                                        WHEN age BETWEEN 11 AND 15 THEN '11-15'
+                                        WHEN age BETWEEN 16 AND 20 THEN '16-20'
+                                        WHEN age BETWEEN 21 AND 25 THEN '21-25'
+                                        WHEN age BETWEEN 26 AND 30 THEN '26-30'
+                                        WHEN age BETWEEN 31 AND 35 THEN '31-35'
+                                        WHEN age BETWEEN 36 AND 40 THEN '36-40'
+                                        WHEN age BETWEEN 41 AND 45 THEN '41-45'
+                                        WHEN age BETWEEN 46 AND 50 THEN '46-50'
+                                        WHEN age BETWEEN 51 AND 55 THEN '51-55'
+                                        WHEN age BETWEEN 56 AND 60 THEN '56-60'
+                                        WHEN age BETWEEN 61 AND 65 THEN '61-65'
+                                        WHEN age BETWEEN 66 AND 70 THEN '66-70'
+                                        WHEN age BETWEEN 71 AND 75 THEN '71-75'
+                                        WHEN age BETWEEN 76 AND 80 THEN '76-80'
+                                        WHEN age BETWEEN 81 AND 85 THEN '81-85'
+                                        WHEN age BETWEEN 86 AND 90 THEN '86-90'
+                                        WHEN age BETWEEN 91 AND 95 THEN '91-95'
+                                        WHEN age BETWEEN 96 AND 100 THEN '96-100'
+                                        ELSE 'Khác' -- Trường hợp tuổi không nằm trong khoảng từ 11 đến 100
                                 END AS age_range,
                                 COUNT(*) AS customer_count
                                 FROM rt_customer
-                                WHERE age BETWEEN 10 AND 100
+                                WHERE age BETWEEN 11 AND 100
                                 AND examination_date BETWEEN '$dateBegin' AND '$dateEnd'
                                 GROUP BY age_range
                                 ORDER BY age_range;
+
                                 ";
                         // echo $sql;
                         mysqli_set_charset($conn, 'UTF8');
