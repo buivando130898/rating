@@ -71,7 +71,7 @@ class api extends restful_api
                         $service_name =  postHandleData("service_name");
                         $month =  postHandleData("month");
                         $note =  postHandleData("note");
-                        $date_end = "0000-00-00";
+                        $date_end = NULL;
                         if ($month) {
                                 $date_end = addMonthsToCurrentDate($month);
                         }
