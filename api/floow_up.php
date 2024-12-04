@@ -75,7 +75,7 @@ class api extends restful_api
                         if ($month) {
                                 $date_end = addMonthsToCurrentDate($month);
                         }
-                        echo $date_end;
+                        // echo $date_end;
                         $sql = "DELETE FROM rt_floow_up WHERE op_no = '$op_no' AND DATE('$time') = DATE(time_input) AND '$time' != time_input ";
 
                         mysqli_set_charset($conn, 'UTF8');
