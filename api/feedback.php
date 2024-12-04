@@ -29,6 +29,11 @@ function rt_log($user, $cmd_content, $cmd_sql)
 
 class api extends restful_api
 {
+        function __construct()
+        {
+                parent::__construct();
+        }
+
         function get_feedback()
         {
                 $user =  tokenLogin($_GET["token"]);

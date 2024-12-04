@@ -1,0 +1,184 @@
+body {
+  font-family: "Times New Roman", Times, serif;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  background: #f1f1f1;
+}
+
+#setting {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.content {
+  width: 850px;
+  /* width: 100%; */
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+input {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bolder;
+}
+
+.info_customer {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bolder;
+  font-size: 16px !important;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 5px;
+}
+th {
+  text-align: center;
+}
+th,
+td {
+  border: 1px solid black;
+  padding: 2px 8px;
+  /* text-align: left; */
+}
+th {
+  background-color: #f2f2f2;
+}
+tr {
+}
+
+.no-border {
+  border: none;
+}
+
+p {
+  padding: 2px 0px;
+  margin: 2px 0px;
+}
+
+.clinic_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.sign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sign input {
+  text-align: center;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.text_bold {
+  font-weight: bold;
+}
+
+.btn3 {
+  font-family: "Times New Roman", Times, serif;
+  box-sizing: border-box;
+  display: inline-block;
+  font-weight: bold;
+  padding: 6px 30px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: rgb(39, 170, 225);
+}
+
+.text_center:hover {
+  background-color: #b9b9b9;
+  cursor: pointer;
+}
+
+table tr:hover {
+  background-color: #ededed;
+}
+
+#text_input {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1a1;
+  flex-direction: column;
+}
+
+.div_text_input {
+  font-family: "Times New Roman", Times, serif;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  shadow: 0 4px 8px rgba(0, 0, 0, 0.02), 0 4px 8px rgba(0, 0, 0, 0.02);
+}
+
+.inputText {
+  display: block;
+  width: 100%;
+  margin-left: 20px;
+  font-family: "Times New Roman", Times, serif;
+  background: rgb(255, 255, 255);
+  margin: auto 0px;
+  font-size: 15px;
+  line-height: 32px;
+  border: none;
+  cursor: text;
+  color: rgb(63, 63, 63);
+  height: 32px;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 10px;
+
+  transition: border 0.3s ease;
+}
+
+textarea:focus {
+  outline: none; /* Loại bỏ viền khi focus */
+  border: none; /* Bỏ viền khi focus, nếu cần */
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.input__style {
+  padding: 12px 5px;
+  font-family: "Bai Jamjuree", sans-serif;
+  background: rgb(230, 230, 230);
+  margin: auto 0px;
+  font-size: 12px;
+  border: none;
+  cursor: text;
+  color: rgb(63, 63, 63);
+  border-radius: 3px;
+  min-width: 240px;
+  text-align: left;
+  padding-left: 10px;
+  /* box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); */
+}
+
+.max_width {
+  max-width: 38px;
+}

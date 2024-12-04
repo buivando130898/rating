@@ -49,6 +49,10 @@ function postHandleData($key)
 
 class api extends restful_api
 {
+        function __construct()
+        {
+                parent::__construct();
+        }
         function add_customer()
         {
                 $user =  tokenLogin($_POST["token"]);

@@ -20,7 +20,7 @@ function save_log($user, $cmd_content, $cmd_sql)
     include('connect.php');
     $time = date('Y-m-d H:i:s ');
     $cmd_sql = addslashes($cmd_sql);
-    $sql = "INSERT INTO khuyenmai_log(user , cmd_content, cmd_sql, timeInput) VALUES ('$user', '$cmd_content', '$cmd_sql', '$time')";
+    $sql = "INSERT INTO rt_log(user , cmd_content, cmd_sql, timeInput) VALUES ('$user', '$cmd_content', '$cmd_sql', '$time')";
     // echo $sql; 
     $result = $conn->query($sql);
     $conn->close();

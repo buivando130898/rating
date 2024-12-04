@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>In Phiếu Khám</title>
+        <link rel="stylesheet" href="flow.css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="../static/css/mess.css" />
+    </head>
+    <body>
+        <div id="text_input" style="display: none">
+            <div class="div_text_input">
+                <textarea
+                    placeholder="Nhập nội dung tại đây..."
+                    id="content_note"
+                    class="input__style"
+                    rows="5"
+                    class="inputText"
+                ></textarea>
+                <div
+                    style="
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 10px;
+                    "
+                >
+                    <button class="btn3" onclick="update()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+        <div id="setting">
+            <button id="follow_up" class="btn3" onclick="print_fllow_up()">
+                In Follow Up
+            </button>
+        </div>
+        <div class="content print">
+            <div class="info_customer print">
+                <div>Họ tên: <input id="name" type="text" class="print" /></div>
+                <div>
+                    Tuổi:
+                    <input
+                        type="text"
+                        class="print"
+                        id="age"
+                        style="width: 50px"
+                    />
+                </div>
+                <div>
+                    Nura ID:
+                    <input
+                        id="op_no"
+                        type="text"
+                        class="print"
+                        style="width: 80px"
+                    />
+                </div>
+            </div>
+            <table id="floww_up_html"></table>
+            <div class="clinic_info">
+                <div style="font-weight: bold">
+                    <div style="margin: 10px">
+                        HOTLINE NURA&nbsp; : &nbsp;&nbsp;1800 64 67 88
+                    </div>
+                    <div style="margin: 10px">
+                        HOTLINE TMC&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;1800 888 616
+                    </div>
+                </div>
+                <div class="sign">
+                    <div id="today"></div>
+                    <div style="height: 80px"></div>
+                    <div>
+                        <input
+                            id="doctor_name"
+                            type="text"
+                            style="width: 250px"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="../static/js/tool.js"></script>
+<script src="../static/js/auth.js"></script>
+<script src="./flow.js"></script>

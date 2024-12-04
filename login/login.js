@@ -21,11 +21,13 @@ function login() {
                 localStorage.setItem('user', data[0].user);
                 localStorage.setItem('token', data[0].token);
                 localStorage.setItem('manager', data[0].manager);
-                if (data[0].manager != 'admin') {
-                    window.location = '../';
-                } else {
-                    window.location = '../dashboard/';
-                }
+                window.location = '../' + data[0].link;
+
+                // if (data[0].manager != 'admin') {
+                //     window.location = '../';
+                // } else {
+                //     window.location = '../dashboard/';
+                // }
             } else {
                 document.getElementById('info_erro').innerHTML =
                     'Tài khoản hoặc mật khẩu không chính xác';
