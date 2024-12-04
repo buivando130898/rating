@@ -24,6 +24,7 @@ body {
 input {
     font-family: 'Times New Roman', Times, serif;
     font-weight: bolder;
+    font-size: 15px;
 }
 
 .info_customer {
