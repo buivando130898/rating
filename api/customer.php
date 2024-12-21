@@ -62,6 +62,7 @@ class api extends restful_api
                         $time = date('Y-m-d H:i:s ');
                         $op_no =  postHandleData("op_no");
                         $name =  postHandleData("name");
+                        $contact =  postHandleData("contact");
                         $examination_date  =  postHandleData("examination_date");
                         $referrer =  postHandleData("referrer");
                         $gender =  postHandleData("gender");
@@ -69,7 +70,7 @@ class api extends restful_api
                         $address =  postHandleData("address");
                         $remarks =  postHandleData("remarks");
                         if ($op_no && checkTest($name)) {
-                                $sql = "INSERT INTO rt_customer(op_no, name, examination_date, referrer, gender, age, address, remarks, time_input) VALUE ('$op_no', '$name', '$examination_date', '$referrer', '$gender', $age, '$address', '$remarks', '$time')";
+                                $sql = "INSERT INTO rt_customer(op_no, name, contact, examination_date, referrer, gender, age, address, remarks, time_input) VALUE ('$op_no', '$name', '$contact', '$examination_date', '$referrer', '$gender', $age, '$address', '$remarks', '$time')";
                                 // echo $sql;
                                 $data = true;
                         } else {

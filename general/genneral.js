@@ -5,6 +5,12 @@ questionAll = {
 
 const question = [
     {
+        name: 'room',
+        title: 'Bạn tư vấn phòng nào?',
+        type: 'select',
+        answer: ['101', '102', '103', '104'],
+    },
+    {
         name: 'name',
         title: 'Tên khách hàng:',
         type: 'text',
@@ -16,23 +22,35 @@ const question = [
         type: 'text',
         answer: '',
     },
-    {
-        name: 'phone',
-        title: 'Số điện thoại liên lạc:',
-        type: 'text',
-        answer: '',
-    },
-    {
-        name: 'mail',
-        title: 'ID email:',
-        type: 'text',
-        answer: '',
-    },
+    // {
+    //     name: 'phone',
+    //     title: 'Số điện thoại liên lạc:',
+    //     type: 'text',
+    //     answer: '',
+    // },
+    // {
+    //     name: 'mail',
+    //     title: 'ID email:',
+    //     type: 'text',
+    //     answer: '',
+    // },
     {
         name: 'satisfied',
         title: 'Vui lòng cho biết mức độ hài lòng chung của bạn với dịch vụ của chúng tôi. (từ 0-10)',
         type: 'rating',
         answer: '',
+    },
+    {
+        name: 'rating',
+        title: 'Bạn có thấy hài lòng sau khi tư vấn với bác sĩ:',
+        type: 'radio',
+        answer: [
+            'Rất hài lòng',
+            'Hài lòng',
+            'Bình thường',
+            'Không hài lòng',
+            'Rất không hài lòng',
+        ],
     },
     {
         name: 'introduce',
@@ -82,6 +100,10 @@ function questionBegin() {
                 question_html += inputRadio(value, index);
                 break;
 
+            case 'select':
+                question_html += inputSelect(value, index);
+                break;
+
             default:
                 console.log(value.type);
                 break;
@@ -110,6 +132,27 @@ function inputText(value, index) {
             }" placeholder="Nhập câu trả lời">
         </div>
     `;
+    return html_input;
+}
+
+function inputSelect(value, index) {
+    answerHTML = '';
+    dataAnswer = value.answer;
+    for (answerValue of dataAnswer) {
+        answerHTML += `
+                <option value="${answerValue}">Phòng ${answerValue}</option>
+        `;
+    }
+
+    html_input = `
+      <div class="input_general ">
+            <lable class="lable">${index + 1}. ${value.title}</lable>
+            <select class="inputText" name="${value.name}" id="${value.name}">
+                ${answerHTML}
+            </select>
+      </div>
+    `;
+
     return html_input;
 }
 
@@ -180,18 +223,22 @@ function getValueRadio(id) {
 function ratingConfirm() {
     name = getvalue('name');
     op_no = getvalue('op_no');
-    phone = getvalue('phone');
-    mail = getvalue('mail');
+    // phone = getvalue('phone');
+    // mail = getvalue('mail');
     why = getvalue('why');
     source = getValueRadio('source');
     good = getvalue('good');
+    if (!checkZoom[getValue('room')]) {
+        alert('Không có bác sĩ tại phòng: ' + getValue('room'));
+        return;
+    }
     // alert(source);
     questionAll = {
         ...questionAll,
         name,
         op_no,
-        phone,
-        mail,
+        // phone,
+        // mail,
         why,
         source,
         good,
@@ -199,7 +246,8 @@ function ratingConfirm() {
     };
     console.log(questionAll);
 
-    if (name) {
+    if (name && op_no) {
+        addRating();
         axios
             .post(server + '/api/general.php/add_general', questionAll, {
                 headers: {
@@ -225,4 +273,63 @@ function ratingConfirm() {
         alert('Vui lòng nhấp đầy đủ thông tin');
         noti('error', 'Vui lòng nhấp đầy đủ thông tin');
     }
+}
+
+function addRating() {
+    data = {
+        zoom: getValue('room'),
+        content: getValueRadio('rating'),
+        mess: '',
+        doctor: checkZoom[getValue('room')],
+        customer: getvalue('op_no'),
+        token,
+    };
+    console.log(data);
+    axios
+        .post(server + '/api/user.php/add_rating', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(function (response) {
+            data = response.data;
+            if (data == true) {
+                console.log('Done');
+            } else {
+                console.log(data);
+                alert('Đã xảy ra lỗi!');
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+checkZoom = [];
+getZoom();
+function getZoom() {
+    data = {
+        token,
+    };
+    // openFlex("ratingForm");
+    axios
+        .get(
+            server + '/api/user.php/get_zoom',
+            { params: data },
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        )
+        .then(function (response) {
+            data = response.data;
+            console.log(data);
+            for (value of data) {
+                checkZoom[value.zoom] = value.doctor;
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }

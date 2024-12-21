@@ -179,6 +179,7 @@ function upload2() {
                 if (formatDate(data.Date)) {
                     customerData = {
                         name: data.Name,
+                        contact: data.Mobile,
                         op_no: data['OP No'],
                         examination_date: formatDate(data.Date),
                         referrer: data.Referrer,

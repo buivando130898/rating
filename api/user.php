@@ -45,7 +45,7 @@ class api extends restful_api
             $zoom = $_POST['zoom'];
             $content = $_POST['content'];
             $mess = $_POST['mess'];
-            // $customer = $_POST['customer'];
+            $customer = $_POST['customer'];
             $doctor = $_POST['doctor'];
             $point = 0;
             if ($content == "Rất không hài lòng") {

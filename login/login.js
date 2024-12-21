@@ -1,5 +1,5 @@
-// server = 'http://localhost:8080/rating/api/auth.php/login';
-server = 'https://ratingnura.nura.com.vn//api/auth.php/login';
+server = 'http://localhost:8080/rating/api/auth.php/login';
+// server = 'https://ratingnura.nura.com.vn//api/auth.php/login';
 
 function login() {
     user = document.getElementById('user').value;

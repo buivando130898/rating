@@ -5,6 +5,12 @@ questionAll = {
 
 const question = [
     {
+        name: 'room',
+        title: 'Which consultation room did you visit?',
+        type: 'select',
+        answer: ['101', '102', '103', '104'],
+    },
+    {
         name: 'name',
         title: 'Name:',
         type: 'text',
@@ -16,24 +22,38 @@ const question = [
         type: 'text',
         answer: '',
     },
-    {
-        name: 'phone',
-        title: 'Contact number:',
-        type: 'text',
-        answer: '',
-    },
-    {
-        name: 'mail',
-        title: 'Email (as provided on ID):',
-        type: 'text',
-        answer: '',
-    },
+    // {
+    //     name: 'phone',
+    //     title: 'Contact number:',
+    //     type: 'text',
+    //     answer: '',
+    // },
+    // {
+    //     name: 'mail',
+    //     title: 'Email (as provided on ID):',
+    //     type: 'text',
+    //     answer: '',
+    // },
     {
         name: 'satisfied',
         title: 'Please indicate your overall satisfaction with our service. (0 being not satisfactory, 10 being very satisfactory.)',
         type: 'rating',
         answer: '',
     },
+
+    {
+        name: 'rating',
+        title: 'Do you feel satisfied after consulting with the doctor?',
+        type: 'radio',
+        answer: [
+            'Very satisfied',
+            'Satisfied',
+            'Neutral',
+            'Dissatisfied',
+            'Very dissatisfied',
+        ],
+    },
+
     {
         name: 'introduce',
         title: 'Are you likely to refer Nura to your friends and family? (0 being very unlikely; 10 being I definitely will.) ',
@@ -71,6 +91,11 @@ var sourceMap = {
     'The Internet/Social Media/Nura’s Media campaign':
         'Internet/Mạng Xã hội/Truyền thông quảng cáo của Nura',
     'Other sources': 'Nguồn khác',
+    'Very satisfied': 'Rất hài lòng',
+    Satisfied: 'Hài lòng',
+    Neutral: 'Bình thường',
+    Dissatisfied: 'Không hài lòng',
+    'Very dissatisfied': 'Rất không hài lòng',
 };
 
 questionBegin();
@@ -88,6 +113,10 @@ function questionBegin() {
 
             case 'radio':
                 question_html += inputRadio(value, index);
+                break;
+
+            case 'select':
+                question_html += inputSelect(value, index);
                 break;
 
             default:
@@ -118,6 +147,27 @@ function inputText(value, index) {
             }" placeholder="Enter answer ...">
         </div>
     `;
+    return html_input;
+}
+
+function inputSelect(value, index) {
+    answerHTML = '';
+    dataAnswer = value.answer;
+    for (answerValue of dataAnswer) {
+        answerHTML += `
+                <option value="${answerValue}">Room ${answerValue}</option>
+        `;
+    }
+
+    html_input = `
+      <div class="input_general ">
+            <lable class="lable">${index + 1}. ${value.title}</lable>
+            <select class="inputText" name="${value.name}" id="${value.name}">
+                ${answerHTML}
+            </select>
+      </div>
+    `;
+
     return html_input;
 }
 
@@ -188,19 +238,19 @@ function getValueRadio(id) {
 function ratingConfirm() {
     name = getvalue('name');
     op_no = getvalue('op_no');
-    phone = getvalue('phone');
-    mail = getvalue('mail');
+    // phone = getvalue('phone');
+    // mail = getvalue('mail');
     why = getvalue('why');
     source = sourceMap[getValueRadio('source')];
-    alert(source);
+    // alert(source);
     good = getvalue('good');
     // alert(source);
     questionAll = {
         ...questionAll,
         name,
         op_no,
-        phone,
-        mail,
+        // phone,
+        // mail,
         why,
         source,
         good,
@@ -208,7 +258,8 @@ function ratingConfirm() {
     };
     console.log(questionAll);
 
-    if (name) {
+    if (name && op_no) {
+        addRating();
         axios
             .post(server + '/api/general.php/add_general', questionAll, {
                 headers: {
@@ -234,4 +285,63 @@ function ratingConfirm() {
         alert('Vui lòng nhấp đầy đủ thông tin');
         noti('error', 'Vui lòng nhấp đầy đủ thông tin');
     }
+}
+
+function addRating() {
+    data = {
+        zoom: getValue('room'),
+        content: sourceMap[getValueRadio('rating')],
+        mess: '',
+        doctor: checkZoom[getValue('room')],
+        customer: getvalue('op_no'),
+        token,
+    };
+    console.log(data);
+    axios
+        .post(server + '/api/user.php/add_rating', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(function (response) {
+            data = response.data;
+            if (data == true) {
+                console.log('Done');
+            } else {
+                console.log(data);
+                alert('Đã xảy ra lỗi!');
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+checkZoom = [];
+getZoom();
+function getZoom() {
+    data = {
+        token,
+    };
+    // openFlex("ratingForm");
+    axios
+        .get(
+            server + '/api/user.php/get_zoom',
+            { params: data },
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        )
+        .then(function (response) {
+            data = response.data;
+            console.log(data);
+            for (value of data) {
+                checkZoom[value.zoom] = value.doctor;
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
