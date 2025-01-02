@@ -95,6 +95,8 @@ function rattingSynthetic() {
         )
         .then(function (response) {
             data = response.data;
+            console.log('Check: ... ');
+
             console.log(data);
             let sl = 0;
             let point = 0;
@@ -113,7 +115,7 @@ function rattingSynthetic() {
         })
         .catch((error) => {
             console.log(error);
-            alert('Erro');
+            alert('Erro 222');
         });
 }
 
