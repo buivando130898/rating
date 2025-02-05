@@ -43,7 +43,7 @@ const question = [
     {
         name: 'rating',
         title: 'Bạn có thấy hài lòng sau khi tư vấn với bác sĩ:',
-        type: 'radio',
+        type: 'star',
         answer: [
             'Rất hài lòng',
             'Hài lòng',
@@ -61,13 +61,13 @@ const question = [
     {
         name: 'why',
         title: 'Vì sao bạn cho số điểm trên?',
-        type: 'text',
+        type: 'textarea',
         answer: '',
     },
     {
         name: 'good',
         title: 'Để phục vụ bạn được tốt hơn, theo bạn chúng tôi cần phải làm gì??',
-        type: 'text',
+        type: 'textarea',
         answer: '',
     },
     {
@@ -92,6 +92,10 @@ function questionBegin() {
                 question_html += inputText(value, index);
                 break;
 
+            case 'textarea':
+                question_html += inputTextarea(value, index);
+                break;
+
             case 'rating':
                 question_html += inputRating(value, index);
                 break;
@@ -102,6 +106,10 @@ function questionBegin() {
 
             case 'select':
                 question_html += inputSelect(value, index);
+                break;
+
+            case 'star':
+                question_html += inputStar(value, index);
                 break;
 
             default:
@@ -123,6 +131,38 @@ function getValueQues(ques, point) {
     document.getElementById(ques + point).style.backgroundColor = '#fac141';
 }
 
+function inputStar(value, index) {
+    html_input = `
+        <div class="input_general">
+            <lable class="lable">${index + 1}. ${value.title}</lable>
+            <div class="ratingStar">
+                <input type="radio" name="${
+                    value.name
+                }" id="star5" value="Rất hài lòng" />
+                <label for="star5">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star4" value="Hài lòng" />
+                <label for="star4">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star3" value="Bình thường" />
+                <label for="star3">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star2" value="Không hài lòng" />
+                <label for="star2">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star1" value="Rất không hài lòng" />
+                <label for="star1">&#9733;</label>
+            </div>
+        </div>
+
+        `;
+    return html_input;
+}
+
 function inputText(value, index) {
     html_input = `
         <div class="input_general">
@@ -130,6 +170,18 @@ function inputText(value, index) {
             <input class="inputText" autocomplete="off" name="${
                 value.name
             }" placeholder="Nhập câu trả lời">
+        </div>
+    `;
+    return html_input;
+}
+
+function inputTextarea(value, index) {
+    html_input = `
+        <div class="input_general">
+            <lable class="lable">${index + 1}. ${value.title}</lable>
+            <textarea class="inputTextarea" rows="3" id="${value.name}" name="${
+        value.name
+    }" placeholder="Nhập câu trả lời..."></textarea>
         </div>
     `;
     return html_input;
@@ -225,9 +277,9 @@ function ratingConfirm() {
     op_no = getvalue('op_no');
     // phone = getvalue('phone');
     // mail = getvalue('mail');
-    why = getvalue('why');
+    why = getValue('why');
     source = getValueRadio('source');
-    good = getvalue('good');
+    good = getValue('good');
     if (!checkZoom[getValue('room')]) {
         alert('Không có bác sĩ tại phòng: ' + getValue('room'));
         return;

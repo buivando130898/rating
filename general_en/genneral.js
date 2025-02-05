@@ -44,7 +44,7 @@ const question = [
     {
         name: 'rating',
         title: 'Do you feel satisfied after consulting with the doctor?',
-        type: 'radio',
+        type: 'star',
         answer: [
             'Very satisfied',
             'Satisfied',
@@ -63,13 +63,13 @@ const question = [
     {
         name: 'why',
         title: 'Why do you give the above score? ',
-        type: 'text',
+        type: 'textarea',
         answer: '',
     },
     {
         name: 'good',
         title: 'What can we improve on?',
-        type: 'text',
+        type: 'textarea',
         answer: '',
     },
     {
@@ -107,6 +107,10 @@ function questionBegin() {
                 question_html += inputText(value, index);
                 break;
 
+            case 'textarea':
+                question_html += inputTextarea(value, index);
+                break;
+
             case 'rating':
                 question_html += inputRating(value, index);
                 break;
@@ -117,6 +121,10 @@ function questionBegin() {
 
             case 'select':
                 question_html += inputSelect(value, index);
+                break;
+
+            case 'star':
+                question_html += inputStar(value, index);
                 break;
 
             default:
@@ -145,6 +153,50 @@ function inputText(value, index) {
             <input class="inputText" autocomplete="off" name="${
                 value.name
             }" placeholder="Enter answer ...">
+        </div>
+    `;
+    return html_input;
+}
+
+function inputStar(value, index) {
+    html_input = `
+        <div class="input_general">
+            <lable class="lable">${index + 1}. ${value.title}</lable>
+            <div class="ratingStar">
+                <input type="radio" name="${
+                    value.name
+                }" id="star5" value="Very satisfied" />
+                <label for="star5">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star4" value="Satisfied" />
+                <label for="star4">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star3" value="Neutral" />
+                <label for="star3">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star2" value="Dissatisfied" />
+                <label for="star2">&#9733;</label>
+                <input type="radio" name="${
+                    value.name
+                }" id="star1" value="Very dissatisfied" />
+                <label for="star1">&#9733;</label>
+            </div>
+        </div>
+
+        `;
+    return html_input;
+}
+
+function inputTextarea(value, index) {
+    html_input = `
+        <div class="input_general">
+            <lable class="lable">${index + 1}. ${value.title}</lable>
+            <textarea class="inputTextarea" rows="3" id="${value.name}" name="${
+        value.name
+    }" placeholder="Enter answer ..."></textarea>
         </div>
     `;
     return html_input;
