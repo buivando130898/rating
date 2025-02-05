@@ -43,7 +43,7 @@ const question = [
 
     {
         name: 'rating',
-        title: 'Do you feel satisfied after consulting with the doctor?',
+        title: 'Were you satisfied with the consultation with the doctor:',
         type: 'star',
         answer: [
             'Very satisfied',
@@ -98,7 +98,36 @@ var sourceMap = {
     'Very dissatisfied': 'Rất không hài lòng',
 };
 
-questionBegin();
+checkZoom = [];
+getZoom();
+function getZoom() {
+    data = {
+        token,
+    };
+    // openFlex("ratingForm");
+    axios
+        .get(
+            server + '/api/user.php/get_zoom',
+            { params: data },
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        )
+        .then(function (response) {
+            data = response.data;
+            console.log(data);
+            for (value of data) {
+                checkZoom[value.zoom] = value.doctor;
+            }
+            questionBegin();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 function questionBegin() {
     question_html = '';
     question.forEach((value, index) => {
@@ -207,7 +236,7 @@ function inputSelect(value, index) {
     dataAnswer = value.answer;
     for (answerValue of dataAnswer) {
         answerHTML += `
-                <option value="${answerValue}">Room ${answerValue}</option>
+                <option value="${answerValue}">Room ${answerValue} - ${checkZoom[answerValue]}</option>
         `;
     }
 
@@ -292,10 +321,10 @@ function ratingConfirm() {
     op_no = getvalue('op_no');
     // phone = getvalue('phone');
     // mail = getvalue('mail');
-    why = getvalue('why');
+    why = getValue('why');
     source = sourceMap[getValueRadio('source')];
     // alert(source);
-    good = getvalue('good');
+    good = getValue('good');
     // alert(source);
     questionAll = {
         ...questionAll,
@@ -362,35 +391,6 @@ function addRating() {
             } else {
                 console.log(data);
                 alert('Đã xảy ra lỗi!');
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
-checkZoom = [];
-getZoom();
-function getZoom() {
-    data = {
-        token,
-    };
-    // openFlex("ratingForm");
-    axios
-        .get(
-            server + '/api/user.php/get_zoom',
-            { params: data },
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            }
-        )
-        .then(function (response) {
-            data = response.data;
-            console.log(data);
-            for (value of data) {
-                checkZoom[value.zoom] = value.doctor;
             }
         })
         .catch(function (error) {
