@@ -357,7 +357,7 @@ function ratingConfirm() {
                 noti('error', 'Đã xảy ra lỗi hệ thống');
             });
     } else {
-        // alert('Vui lòng nhấp đầy đủ thông tin');
+        alert('Vui lòng nhấp đầy đủ thông tin');
         noti('error', 'Vui lòng nhấp đầy đủ thông tin');
     }
 }
