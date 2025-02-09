@@ -1,6 +1,6 @@
 questionAll = {
-    satisfied: 10,
-    introduce: 10,
+    satisfied: 0,
+    introduce: 0,
 };
 
 const question = [
@@ -311,7 +311,7 @@ function getValueRadio(id) {
     const selectedRadio = document.querySelector(`input[name="${id}"]:checked`);
 
     // Lấy giá trị của radio được chọn (nếu có)
-    const selectedValue = selectedRadio ? selectedRadio.value : 'Nguồn khác';
+    const selectedValue = selectedRadio ? selectedRadio.value : '';
 
     return selectedValue;
 }
@@ -339,7 +339,13 @@ function ratingConfirm() {
     };
     console.log(questionAll);
 
-    if (name && op_no) {
+    if (
+        name &&
+        op_no &&
+        questionAll.satisfied &&
+        questionAll.introduce &&
+        source
+    ) {
         addRating();
         axios
             .post(server + '/api/general.php/add_general', questionAll, {
@@ -378,22 +384,24 @@ function addRating() {
         token,
     };
     console.log(data);
-    axios
-        .post(server + '/api/user.php/add_rating', data, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        })
-        .then(function (response) {
-            data = response.data;
-            if (data == true) {
-                console.log('Done');
-            } else {
-                console.log(data);
-                alert('Đã xảy ra lỗi!');
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    if (data.content) {
+        axios
+            .post(server + '/api/user.php/add_rating', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then(function (response) {
+                data = response.data;
+                if (data == true) {
+                    console.log('Done');
+                } else {
+                    console.log(data);
+                    alert('Đã xảy ra lỗi!');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 }
