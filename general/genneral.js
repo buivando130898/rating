@@ -327,7 +327,13 @@ function ratingConfirm() {
     };
     console.log(questionAll);
 
-    if (name && op_no && source && satisfied && introduce) {
+    if (
+        name &&
+        op_no &&
+        source &&
+        questionAll.satisfied &&
+        questionAll.introduce
+    ) {
         addRating();
         axios
             .post(server + '/api/general.php/add_general', questionAll, {
