@@ -357,7 +357,7 @@ function ratingConfirm() {
                 noti('error', 'Đã xảy ra lỗi hệ thống');
             });
     } else {
-        alert('Vui lòng nhấp đầy đủ thông tin');
+        // alert('Vui lòng nhấp đầy đủ thông tin');
         noti('error', 'Vui lòng nhấp đầy đủ thông tin');
     }
 }
@@ -372,7 +372,7 @@ function addRating() {
         token,
     };
     console.log(data);
-    if (content) {
+    if (data.content) {
         axios
             .post(server + '/api/user.php/add_rating', data, {
                 headers: {
